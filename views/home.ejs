@@ -3,37 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>ShureArchitects</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <link rel="stylesheet" href="/public/style.css">
+  <link rel="stylesheet" href="/public/style/home.css">
   <style>
-    html, body {
-      height: 100%;
-      
-      margin: 0;
+    body {
+      background-color: #f8f9fa;
     }
     .container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      text-align: center;
+      margin-top: 50px;
     }
-    .jumbotron {
-      margin-bottom: 0;
+    .img img {
+      max-width: 100%;
+      height: auto;
+    }
+    h1 {
+      font-size: 6vw; /* Responsive font size */
+    }
+    p.lead {
+      font-size: 1.5vw; /* Responsive font size */
+    }
+    .btn {
+      margin: 10px;
+      font-size: 1.5vw; /* Responsive font size */
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 8vw;
+      }
+      p.lead {
+        font-size: 1.5vw;
+      }
+      .btn {
+        font-size: 2vw;
+      }
     }
   </style>
 </head>
-<body class="jumbotron">
+<body>
   <div class="container">
-    <div class="">
-      <div class="container">
-        <i class="fas fa-key fa-6x"></i>
-        <h1 class="display-3">Secrets</h1>
-        <p class="lead">Don't keep your secrets, share them anonymously!</p>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="img">
+          <img src="https://github.com/mshraky3/base/blob/main/WhatsApp%20Image%202024-09-05%20at%2014.34.15_195e0023.jpg?raw=true" id="logo" alt="ShureArchitects Logo"> 
+        </div>
+        <h1 class="display-3">ShureArchitects</h1>
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         <hr>
         <a class="btn btn-light btn-lg" href="/register" role="button">Register</a>
-        <br>
         <a class="btn btn-dark btn-lg" href="/login" role="button">Login</a>
       </div>
     </div>

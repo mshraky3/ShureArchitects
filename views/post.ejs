@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/style/list.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>post</title>
+</head>
+<body>
+    <h1 class="title">
+        Engineering Firms
+      </h1>
+      <hr>
+      <div class="content">
+        <div class="parent">
+            <div class="div1">
+                <div class="container">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <% company.images.forEach(function(image, index) { %>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" class="<%= index === 0 ? 'active' : '' %>"></li>
+                            <% }); %>
+                        </ol>
+                        <div class="carousel-inner">
+                            <% company.images.forEach(function(image, index) { %>
+                                <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                                    <img class="d-block w-100" src="data:image/jpeg;base64,<%= image %>" alt="Company Image">
+                                </div>
+                            <% }); %>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    <div class="details">
+                        <p><strong>COMPANY NAME:</strong> <%= company.name %></p>
+                        <p><strong>LOCATION:</strong> <%= company.location %></p>
+                        <p><strong>NUMBER:</strong> <%= company.number %></p>
+                        <p><strong>DETAILS:</strong> <%= company.details %></p>
+                    </div>
+                </div>
+            </div>
+          <div class="div2" > <div class="flex-start" id="name"> <p ><strong>COMPANY NAME:</strong> Architect Passive</p> </div> </div>
+          <div class="div3"> <div class="flex"> <p>LOCATION:</p> </div></div>
+          <div class="div4"> <div class="flex"> <p><strong>NUMBER:</strong></p> </div> </div>
+          <div class="div5"> <div class="flex-start" id="rating"> RATING:  ★ ★ ★ ★ ★ <span class="rating"></span></> </div></div>
+          <div class="div6"> <p  >Details about the company...</p> </div>
+          <div class="div7"> <a href="#" class="more-details"></a> </div>
+          </div>
+      </div>
+      <center>
+
+        <div class="more-deteils">
+            <div class="deteils-title">
+                           <h2>
+                             MORE DETAILS
+                           </h2> 
+            </div>
+            
+            <div class="deteils">
+                <h4>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                </h4>
+            </div>
+
+        </div>
+      
+            <div class="comments"> 
+                <div class="coments-contaner"> 
+                <div class="comment-section">
+                        <h2>Comments</h2>
+                    <form class="comment-form" name="comment">
+                        <textarea placeholder="Write a comment..."></textarea>
+                        <button type="submit">Post Comment</button>
+                    </form>
+                    <div class="comments">
+                        <!-- Comments will be displayed here -->
+                    </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </center>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
