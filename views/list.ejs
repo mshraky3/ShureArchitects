@@ -10,7 +10,7 @@
   <%- include("nav") %>
 
   <div class="container">
-    <h1 class="title">Engineering Firms</h1>
+    <h1 class="title"><%= type === 'engeneering' ? 'Engineering Firms' : type === 'contractor' ? 'Contractors' : 'Freelancers' %></h1>
     <hr>
     <div class="content">
       <% companies.forEach(company => { %>
@@ -40,7 +40,7 @@
             <p style="padding-top:20px; margin-bottom: -10px;">Details about the company: <%= company.details %></p>
           </div>
           <div class="div7">
-            <a href="/company/<%= company.id %>" class="more-details">MORE DETAILS <i class="fa-sharp-duotone fa-solid fa-arrow-right-long fa-fade fa-2xl"></i></a>
+            <a href="/post/<%=type%>/<%=company.id%>" class="more-details">MORE DETAILS <i class="fa-sharp-duotone fa-solid fa-arrow-right-long fa-fade fa-2xl"></i></a>
           </div>
         </div>
       <% }) %>

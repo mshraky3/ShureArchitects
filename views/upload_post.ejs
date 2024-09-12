@@ -6,7 +6,6 @@
     <title>ShureArchitects</title>
 </head>
 <body>
-    <%- include('nav'); %>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -85,9 +84,9 @@
             </div>
           </div>
           <div class="div7">
-            <a href="/post" class="more-details">MORE DETAILS <i class="fa-sharp-duotone fa-solid fa-arrow-right-long fa-fade fa-2xl"></i></a>
           </div>
         </div>
+        <input type="hidden" name="list_type" , value='<%=list_type%>'>
         <button type="submit">Upload</button>
       </form>
 </body>
