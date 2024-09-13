@@ -31,28 +31,27 @@ const upload = multer({ storage: storage });
 const date = new Date()
 const year = date.getFullYear()
 
-const db  = new pg.Client({ 
-        password :"gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
-        host:"dpg-crd1mqg8fa8c73bg324g-a", 
-        database :"users_x5qf", 
-        user: "users_x5qf_user",
-        port : 5432
-         })
+// const db  = new pg.Client({ 
+//         password :"gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
+//         host:"dpg-crd1mqg8fa8c73bg324g-a", 
+//         database :"users_x5qf", 
+//         user: "users_x5qf_user",
+//         port : 5432
+//          })
 
-// const db = new pg.Client({ password: "Ejc9c123", host: "localhost", database: " Authentication", user: "postgres", port: 5432 })
+const db = new pg.Client({ password: "Ejc9c123", host: "localhost", database: " Authentication", user: "postgres", port: 5432 })
 
 db.connect()
 
 async function get_data() {
   const data = await db.query("SELECT * FROM users");
 }
-
 let is_user = false
 let user = {}
 let stat_mess = "";
 
 app.get("/", async (req, res) => {
-  res.render("home.ejs")
+  res.render("profile.ejs")
 })
 
 
@@ -95,7 +94,7 @@ app.get("/user-profile", (req, res) => {
 })
 
 app.get("/list", (req, res) => {
-  res.render("list.ejs" )
+  res.render("list.ejs")
 })
 
 app.get("/profile", (req, res) => {
@@ -106,7 +105,7 @@ app.get("/profile", (req, res) => {
       username: user.username
     })
   } else
-    (res.redirect("/"))
+    res.render("profile.ejs",{date: year})
 })
 
 app.post("/profile", async (req, res) => {
@@ -123,6 +122,7 @@ app.post("/profile", async (req, res) => {
       res.render("profile.ejs", {
         date: year,
         type: type,
+        is_user : is_user,
         username: username.rows[0].username
       })
     } else {
@@ -186,14 +186,14 @@ app.post("/upload_new_post", async (req, res) => {
   }
 
   const imageArray = Array.isArray(images) ? images : [images];
-  const { companyName, location, number, details, list_type } = req.body;
+  const { companyName, location, number, details, list_type  , title} = req.body;
 
   try {
     if (list_type === 'freelancer') {
       // Insert freelancer information
       const freelancerResult = await db.query(
-        "INSERT INTO freelancer_info (name, location, number, details, username) VALUES ($1, $2, $3, $4, $5) RETURNING id",
-        [companyName, location, number, details, user.username]
+        "INSERT INTO freelancer_info (name, location, number, details, username , title) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
+        [companyName, location, number, details, user.username , title]
       );
 
       const freelancerId = freelancerResult.rows[0].id;
@@ -209,8 +209,8 @@ app.post("/upload_new_post", async (req, res) => {
     } else if (list_type === 'contractor') {
       // Insert contractor information
       const contractorResult = await db.query(
-        "INSERT INTO contractor_info (name, location, number, details, username) VALUES ($1, $2, $3, $4, $5) RETURNING id",
-        [companyName, location, number, details, user.username]
+        "INSERT INTO contractor_info (name, location, number, details, username , title) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
+        [companyName, location, number, details, user.username , title]
       );
 
       const contractorId = contractorResult.rows[0].id;
@@ -227,8 +227,8 @@ app.post("/upload_new_post", async (req, res) => {
     } else {
       // Insert company information
       const companyResult = await db.query(
-        "INSERT INTO company_info (company_name, location, number, details, username) VALUES ($1, $2, $3, $4, $5) RETURNING id",
-        [companyName, location, number, details, user.username]
+        "INSERT INTO company_info (company_name, location, number, details, username , title) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
+        [companyName, location, number, details, user.username , title]
       );
 
       const companyId = companyResult.rows[0].id;
@@ -262,7 +262,7 @@ app.get("/uploaded", async (req, res) => {
   if(type ==="engeneering"){
     try{
       const companyResult = await db.query(`
-      SELECT ci.id, ci.company_name, ci.location, ci.number, ci.rating, ci.details, ci.username, ci2.image
+      SELECT ci.id, ci.company_name, ci.location, ci.number, ci.rating, ci.details, ci.username, ci.title , ci2.image
       FROM company_info ci
       LEFT JOIN company_images ci2 ON ci.id = ci2.company_id
       WHERE ci.username = $1
@@ -279,6 +279,7 @@ app.get("/uploaded", async (req, res) => {
           rating: row.rating,
           details: row.details,
           username: row.username,
+          title : row.title ,
           images: []
         };
       }
@@ -297,7 +298,7 @@ app.get("/uploaded", async (req, res) => {
   }else if(type ==="contractor"){
     try{
       const contractorResult = await db.query(`
-        SELECT ci.id, ci.name, ci.location, ci.number, ci.details, ci.username, ci2.image
+        SELECT ci.id, ci.name, ci.location, ci.number, ci.details, ci.username,ci.title , ci2.image
         FROM contractor_info ci
         LEFT JOIN contractor_images ci2 ON ci.id = ci2.contractor_id
         WHERE ci.username = $1
@@ -312,6 +313,7 @@ app.get("/uploaded", async (req, res) => {
             number: row.number,
             details: row.details,
             username: row.username,
+            title : row.title ,
             images: []
           };
         }
@@ -330,7 +332,7 @@ app.get("/uploaded", async (req, res) => {
   
   try {
     const freelancerResult = await db.query(`
-      SELECT fi.id, fi.name, fi.location, fi.number, fi.details, fi.username, fi2.image
+      SELECT fi.id, fi.name, fi.location, fi.number, fi.details, fi.username, fi.title , fi2.image
       FROM freelancer_info fi
       LEFT JOIN freelancer_images fi2 ON fi.id = fi2.freelancer_id
       WHERE fi.username = $1
@@ -346,6 +348,7 @@ app.get("/uploaded", async (req, res) => {
           number: row.number,
           details: row.details,
           username: row.username,
+          title : row.title ,
           images: []
         };
       }
@@ -366,8 +369,6 @@ app.get("/uploaded", async (req, res) => {
 });
 
 
-
-
 app.post("/uploaded", async (req, res) => {
   try {
 
@@ -375,7 +376,7 @@ app.post("/uploaded", async (req, res) => {
   if(req.body.upload_type ==="engeneering"){
     try{
       const companyResult = await db.query(`
-      SELECT ci.id, ci.company_name, ci.location, ci.number, ci.rating, ci.details, ci.username, ci2.image
+      SELECT ci.id, ci.company_name, ci.location, ci.number, ci.rating, ci.details, ci.username,ci.title , ci2.image
       FROM company_info ci
       LEFT JOIN company_images ci2 ON ci.id = ci2.company_id
       WHERE ci.username = $1
@@ -392,6 +393,7 @@ app.post("/uploaded", async (req, res) => {
           rating: row.rating,
           details: row.details,
           username: row.username,
+          title : row.title ,
           images: []
         };
       }
@@ -410,7 +412,7 @@ app.post("/uploaded", async (req, res) => {
   }else if(req.body.upload_type ==="contractor"){
     try{
       const contractorResult = await db.query(`
-        SELECT ci.id, ci.name, ci.location, ci.number, ci.details, ci.username, ci2.image
+        SELECT ci.id, ci.name, ci.location, ci.number, ci.details, ci.username,ci.title , ci2.image
         FROM contractor_info ci
         LEFT JOIN contractor_images ci2 ON ci.id = ci2.contractor_id
         WHERE ci.username = $1
@@ -425,6 +427,7 @@ app.post("/uploaded", async (req, res) => {
             number: row.number,
             details: row.details,
             username: row.username,
+            title : row.title ,
             images: []
           };
         }
@@ -443,7 +446,7 @@ app.post("/uploaded", async (req, res) => {
   
   try {
     const freelancerResult = await db.query(`
-      SELECT fi.id, fi.name, fi.location, fi.number, fi.details, fi.username, fi2.image
+      SELECT fi.id, fi.name, fi.location, fi.number, fi.details, fi.username, fi.title ,fi2.image
       FROM freelancer_info fi
       LEFT JOIN freelancer_images fi2 ON fi.id = fi2.freelancer_id
       WHERE fi.username = $1
@@ -459,6 +462,7 @@ app.post("/uploaded", async (req, res) => {
           number: row.number,
           details: row.details,
           username: row.username,
+          title : row.title ,
           images: []
         };
       }
