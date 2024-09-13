@@ -31,15 +31,15 @@ const upload = multer({ storage: storage });
 const date = new Date()
 const year = date.getFullYear()
 
-// const db  = new pg.Client({ 
-//         password :"gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
-//         host:"dpg-crd1mqg8fa8c73bg324g-a", 
-//         database :"users_x5qf", 
-//         user: "users_x5qf_user",
-//         port : 5432
-//          })
+const db = new pg.Client({
+  password: "gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
+  host: "dpg-crd1mqg8fa8c73bg324g-a",
+  database: "users_x5qf",
+  user: "users_x5qf_user",
+  port: 5432
+})
 
-const db = new pg.Client({ password: "Ejc9c123", host: "localhost", database: " Authentication", user: "postgres", port: 5432 })
+// const db = new pg.Client({ password: "Ejc9c123", host: "localhost", database: " Authentication", user: "postgres", port: 5432 })
 
 db.connect()
 
@@ -105,7 +105,7 @@ app.get("/profile", (req, res) => {
       username: user.username
     })
   } else
-    res.render("profile.ejs",{date: year})
+    res.render("profile.ejs", { date: year })
 })
 
 app.post("/profile", async (req, res) => {
@@ -122,7 +122,7 @@ app.post("/profile", async (req, res) => {
       res.render("profile.ejs", {
         date: year,
         type: type,
-        is_user : is_user,
+        is_user: is_user,
         username: username.rows[0].username
       })
     } else {
@@ -174,7 +174,7 @@ let list_of_type = ""
 
 app.post("/upload_post", (req, res) => {
   list_of_type = req.body.upload_type;
-  res.render("upload_post.ejs", { user: user , list_type:req.body.upload_type })
+  res.render("upload_post.ejs", { user: user, list_type: req.body.upload_type })
 })
 
 
@@ -186,14 +186,14 @@ app.post("/upload_new_post", async (req, res) => {
   }
 
   const imageArray = Array.isArray(images) ? images : [images];
-  const { companyName, location, number, details, list_type  , title} = req.body;
+  const { companyName, location, number, details, list_type, title } = req.body;
 
   try {
     if (list_type === 'freelancer') {
       // Insert freelancer information
       const freelancerResult = await db.query(
         "INSERT INTO freelancer_info (name, location, number, details, username , title) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
-        [companyName, location, number, details, user.username , title]
+        [companyName, location, number, details, user.username, title]
       );
 
       const freelancerId = freelancerResult.rows[0].id;
@@ -210,7 +210,7 @@ app.post("/upload_new_post", async (req, res) => {
       // Insert contractor information
       const contractorResult = await db.query(
         "INSERT INTO contractor_info (name, location, number, details, username , title) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
-        [companyName, location, number, details, user.username , title]
+        [companyName, location, number, details, user.username, title]
       );
 
       const contractorId = contractorResult.rows[0].id;
@@ -228,7 +228,7 @@ app.post("/upload_new_post", async (req, res) => {
       // Insert company information
       const companyResult = await db.query(
         "INSERT INTO company_info (company_name, location, number, details, username , title) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
-        [companyName, location, number, details, user.username , title]
+        [companyName, location, number, details, user.username, title]
       );
 
       const companyId = companyResult.rows[0].id;
@@ -244,7 +244,7 @@ app.post("/upload_new_post", async (req, res) => {
       }
     }
     console.log('here')
-    
+
     res.redirect("/uploaded");
   } catch (error) {
     console.error("Error uploading data:", error);
@@ -258,228 +258,228 @@ app.post("/upload_new_post", async (req, res) => {
 app.get("/uploaded", async (req, res) => {
   const type = list_of_type
   try {
-  
-  if(type ==="engeneering"){
-    try{
-      const companyResult = await db.query(`
+
+    if (type === "engeneering") {
+      try {
+        const companyResult = await db.query(`
       SELECT ci.id, ci.company_name, ci.location, ci.number, ci.rating, ci.details, ci.username, ci.title , ci2.image
       FROM company_info ci
       LEFT JOIN company_images ci2 ON ci.id = ci2.company_id
       WHERE ci.username = $1
     `, [user.username]);
 
-    const companies = {};
-    companyResult.rows.forEach(row => {
-      if (!companies[row.id]) {
-        companies[row.id] = {
-          id: row.id,
-          name: row.company_name,
-          location: row.location,
-          number: row.number,
-          rating: row.rating,
-          details: row.details,
-          username: row.username,
-          title : row.title ,
-          images: []
-        };
-      }
-      if (row.image) {
-        companies[row.id].images.push(row.image.toString('base64'));
-      }
-    });
+        const companies = {};
+        companyResult.rows.forEach(row => {
+          if (!companies[row.id]) {
+            companies[row.id] = {
+              id: row.id,
+              name: row.company_name,
+              location: row.location,
+              number: row.number,
+              rating: row.rating,
+              details: row.details,
+              username: row.username,
+              title: row.title,
+              images: []
+            };
+          }
+          if (row.image) {
+            companies[row.id].images.push(row.image.toString('base64'));
+          }
+        });
 
-    const companiesArray = Object.values(companies);
-    res.render("list.ejs", { companies: companiesArray ,type:list_of_type});
-    }catch(err){
-      console.error("Error fetching data:", error);
-      res.status(500).send("An error occurred while fetching data.");
-    }
-    
-  }else if(type ==="contractor"){
-    try{
-      const contractorResult = await db.query(`
+        const companiesArray = Object.values(companies);
+        res.render("list.ejs", { companies: companiesArray, type: list_of_type });
+      } catch (err) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("An error occurred while fetching data.");
+      }
+
+    } else if (type === "contractor") {
+      try {
+        const contractorResult = await db.query(`
         SELECT ci.id, ci.name, ci.location, ci.number, ci.details, ci.username,ci.title , ci2.image
         FROM contractor_info ci
         LEFT JOIN contractor_images ci2 ON ci.id = ci2.contractor_id
         WHERE ci.username = $1
       `, [user.username]);
-      const contractors = {};
-      contractorResult.rows.forEach(row => {
-        if (!contractors[row.id]) {
-          contractors[row.id] = {
-            id: row.id,
-            name: row.name,
-            location: row.location,
-            number: row.number,
-            details: row.details,
-            username: row.username,
-            title : row.title ,
-            images: []
-          };
-        }
-        if (row.image) {
-          contractors[row.id].images.push(row.image.toString('base64'));
-        }
-      });
-      const contractorsArray = Object.values(contractors);
-      res.render("list.ejs", { companies: contractorsArray,type:list_of_type});
-    }catch(err){
-      console.error("Error fetching data:", error);
-      res.status(500).send("An error occurred while fetching data.");
-    }
-  }else{
+        const contractors = {};
+        contractorResult.rows.forEach(row => {
+          if (!contractors[row.id]) {
+            contractors[row.id] = {
+              id: row.id,
+              name: row.name,
+              location: row.location,
+              number: row.number,
+              details: row.details,
+              username: row.username,
+              title: row.title,
+              images: []
+            };
+          }
+          if (row.image) {
+            contractors[row.id].images.push(row.image.toString('base64'));
+          }
+        });
+        const contractorsArray = Object.values(contractors);
+        res.render("list.ejs", { companies: contractorsArray, type: list_of_type });
+      } catch (err) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("An error occurred while fetching data.");
+      }
+    } else {
 
-  
-  try {
-    const freelancerResult = await db.query(`
+
+      try {
+        const freelancerResult = await db.query(`
       SELECT fi.id, fi.name, fi.location, fi.number, fi.details, fi.username, fi.title , fi2.image
       FROM freelancer_info fi
       LEFT JOIN freelancer_images fi2 ON fi.id = fi2.freelancer_id
       WHERE fi.username = $1
     `, [user.username]);
 
-    const freelancers = {};
-    freelancerResult.rows.forEach(row => {
-      if (!freelancers[row.id]) {
-        freelancers[row.id] = {
-          id: row.id,
-          name: row.name,
-          location: row.location,
-          number: row.number,
-          details: row.details,
-          username: row.username,
-          title : row.title ,
-          images: []
-        };
+        const freelancers = {};
+        freelancerResult.rows.forEach(row => {
+          if (!freelancers[row.id]) {
+            freelancers[row.id] = {
+              id: row.id,
+              name: row.name,
+              location: row.location,
+              number: row.number,
+              details: row.details,
+              username: row.username,
+              title: row.title,
+              images: []
+            };
+          }
+          if (row.image) {
+            freelancers[row.id].images.push(row.image.toString('base64'));
+          }
+        });
+        const freelancersArray = Object.values(freelancers);
+        res.render("list.ejs", { companies: freelancersArray, type: list_of_type });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("An error occurred while fetching data.");
       }
-      if (row.image) {
-        freelancers[row.id].images.push(row.image.toString('base64'));
-      }
-    });
-    const freelancersArray = Object.values(freelancers);
-    res.render("list.ejs", { companies: freelancersArray ,type:list_of_type});
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).send("An error occurred while fetching data.");
+    }
+  } catch (err) {
+    console.error(err)
   }
-  }
-}catch(err){
-  console.error(err)
-}
 });
 
 
 app.post("/uploaded", async (req, res) => {
   try {
 
-  
-  if(req.body.upload_type ==="engeneering"){
-    try{
-      const companyResult = await db.query(`
+
+    if (req.body.upload_type === "engeneering") {
+      try {
+        const companyResult = await db.query(`
       SELECT ci.id, ci.company_name, ci.location, ci.number, ci.rating, ci.details, ci.username,ci.title , ci2.image
       FROM company_info ci
       LEFT JOIN company_images ci2 ON ci.id = ci2.company_id
       WHERE ci.username = $1
     `, [user.username]);
 
-    const companies = {};
-    companyResult.rows.forEach(row => {
-      if (!companies[row.id]) {
-        companies[row.id] = {
-          id: row.id,
-          name: row.company_name,
-          location: row.location,
-          number: row.number,
-          rating: row.rating,
-          details: row.details,
-          username: row.username,
-          title : row.title ,
-          images: []
-        };
-      }
-      if (row.image) {
-        companies[row.id].images.push(row.image.toString('base64'));
-      }
-    });
+        const companies = {};
+        companyResult.rows.forEach(row => {
+          if (!companies[row.id]) {
+            companies[row.id] = {
+              id: row.id,
+              name: row.company_name,
+              location: row.location,
+              number: row.number,
+              rating: row.rating,
+              details: row.details,
+              username: row.username,
+              title: row.title,
+              images: []
+            };
+          }
+          if (row.image) {
+            companies[row.id].images.push(row.image.toString('base64'));
+          }
+        });
 
-    const companiesArray = Object.values(companies);
-    res.render("list.ejs", { companies: companiesArray , type:req.body.upload_type});
-    }catch(err){
-      console.error("Error fetching data:", error);
-      res.status(500).send("An error occurred while fetching data.");
-    }
-    
-  }else if(req.body.upload_type ==="contractor"){
-    try{
-      const contractorResult = await db.query(`
+        const companiesArray = Object.values(companies);
+        res.render("list.ejs", { companies: companiesArray, type: req.body.upload_type });
+      } catch (err) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("An error occurred while fetching data.");
+      }
+
+    } else if (req.body.upload_type === "contractor") {
+      try {
+        const contractorResult = await db.query(`
         SELECT ci.id, ci.name, ci.location, ci.number, ci.details, ci.username,ci.title , ci2.image
         FROM contractor_info ci
         LEFT JOIN contractor_images ci2 ON ci.id = ci2.contractor_id
         WHERE ci.username = $1
       `, [user.username]);
-      const contractors = {};
-      contractorResult.rows.forEach(row => {
-        if (!contractors[row.id]) {
-          contractors[row.id] = {
-            id: row.id,
-            name: row.name,
-            location: row.location,
-            number: row.number,
-            details: row.details,
-            username: row.username,
-            title : row.title ,
-            images: []
-          };
-        }
-        if (row.image) {
-          contractors[row.id].images.push(row.image.toString('base64'));
-        }
-      });
-      const contractorsArray = Object.values(contractors);
-      res.render("list.ejs", { companies: contractorsArray , type:req.body.upload_type});
-    }catch(err){
-      console.error("Error fetching data:", error);
-      res.status(500).send("An error occurred while fetching data.");
-    }
-  }else{
+        const contractors = {};
+        contractorResult.rows.forEach(row => {
+          if (!contractors[row.id]) {
+            contractors[row.id] = {
+              id: row.id,
+              name: row.name,
+              location: row.location,
+              number: row.number,
+              details: row.details,
+              username: row.username,
+              title: row.title,
+              images: []
+            };
+          }
+          if (row.image) {
+            contractors[row.id].images.push(row.image.toString('base64'));
+          }
+        });
+        const contractorsArray = Object.values(contractors);
+        res.render("list.ejs", { companies: contractorsArray, type: req.body.upload_type });
+      } catch (err) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("An error occurred while fetching data.");
+      }
+    } else {
 
-  
-  try {
-    const freelancerResult = await db.query(`
+
+      try {
+        const freelancerResult = await db.query(`
       SELECT fi.id, fi.name, fi.location, fi.number, fi.details, fi.username, fi.title ,fi2.image
       FROM freelancer_info fi
       LEFT JOIN freelancer_images fi2 ON fi.id = fi2.freelancer_id
       WHERE fi.username = $1
     `, [user.username]);
 
-    const freelancers = {};
-    freelancerResult.rows.forEach(row => {
-      if (!freelancers[row.id]) {
-        freelancers[row.id] = {
-          id: row.id,
-          name: row.name,
-          location: row.location,
-          number: row.number,
-          details: row.details,
-          username: row.username,
-          title : row.title ,
-          images: []
-        };
+        const freelancers = {};
+        freelancerResult.rows.forEach(row => {
+          if (!freelancers[row.id]) {
+            freelancers[row.id] = {
+              id: row.id,
+              name: row.name,
+              location: row.location,
+              number: row.number,
+              details: row.details,
+              username: row.username,
+              title: row.title,
+              images: []
+            };
+          }
+          if (row.image) {
+            freelancers[row.id].images.push(row.image.toString('base64'));
+          }
+        });
+        const freelancersArray = Object.values(freelancers);
+        res.render("list.ejs", { companies: freelancersArray, type: req.body.upload_type });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("An error occurred while fetching data.");
       }
-      if (row.image) {
-        freelancers[row.id].images.push(row.image.toString('base64'));
-      }
-    });
-    const freelancersArray = Object.values(freelancers);
-    res.render("list.ejs", { companies: freelancersArray , type:req.body.upload_type});
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).send("An error occurred while fetching data.");
+    }
+  } catch (err) {
+    console.error(err)
   }
-  }
-}catch(err){
-  console.error(err)
-}
 });
 
 app.get("/post/:type/:id", async (req, res) => {
@@ -509,7 +509,7 @@ app.get("/post/:type/:id", async (req, res) => {
       data = result.rows[0];
       // Fetch freelancer images
       imagesResult = await db.query("SELECT image FROM freelancer_images WHERE freelancer_id = $1", [id]);
-      
+
     }
 
     const images = imagesResult.rows.map(row => row.image.toString('base64'));
