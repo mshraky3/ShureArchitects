@@ -9,11 +9,8 @@
 </head>
 
 <body id="body">
-  <section id="img" class="parent">
+  <section id="img">
     <%- include('nav'); %>
-    <div class="div1">
-      <div>
-      </div>
   </section>
   <hr class="hr">
   <section>
@@ -78,8 +75,100 @@
       </div>
     </div>
   </section>
+
+  <section class="some-posts">
+    <div class="some-posts-contaner">
+      <div class="some-posts-text">
+        المشاريع المطروحة
+      </div>
+      <div class="some-posts-btn">
+        <form action="/uploaded" method="post"> <button class="btn btn-info some-posts-btn" name="upload_type" value="engeneering">المزيد</button> </form> </form>
+      </div>
+    </div>
+    <div class="center-posts">
+        <div class="row">
+        <%if(locals.companies){ %>
+        <% companies.forEach(company => { %>
+          <div class="col">
+            <div class="some-posts-posts">
+              <div class="card" style="width: 16rem;">
+                <div class="img-control">
+                </div>
+                <img class="card-img-top" src="data:image/jpeg;base64,<%= company.images[0] %>" alt="<%= company.name %>" alt="Card image cap" width="250px" height="143px" overflow="hidden">
+                <div class="card-body">
+                  <h5 class="card-title"><%=company.name %></h5>
+                  <p class="card-text"><%=company.title %></p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>  
+          <% for(let x = 0; x<Cnum;x++){ %>
+              <div class="col" style="opacity: 25%;">
+                <div class="some-posts-posts">
+                  <div class="card" style="width: 16rem;">
+                    <img class="card-img-top" style="background-color: dimgrey;" width="250px" height="143px" overflow="hidden">
+                    <div class="card-body">
+                      <h5 class="card-title">لا يوجد</h5>
+                      <p class="card-text"></p>
+                      <a href="#" class="btn btn-primary">لا يوجد</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+         <% } %>   
+      </div>
+    </div>
+    <div class="some-posts-contaner">
+      <div class="some-posts-text">
+        المشاريع المطروحة
+      </div>
+      <div class="some-posts-btn">
+        <form action="/uploaded" method="post"> <button class="btn btn-info some-posts-btn" name="upload_type" value="contractor">المزيد</button> </form> </form>
+      </div>
+    </div>
+    <div class="center-posts">
+        <div class="row">
+        
+        <%if(locals.contractors.length){ %>
+        <% contractors.forEach(contractor => { %>
+          <div class="col">
+            <div class="some-posts-posts">
+              <div class="card" style="width: 16rem;">
+                <img class="card-img-top" src="data:image/jpeg;base64,<%= contractor.images[0] %>" alt="<%= contractor.name %>" alt="Card image cap" width="250px" height="143px" overflow="hidden">
+                <div class="card-body">
+                  <h5 class="card-title"><%=contractor.name %></h5>
+                  <p class="card-text"><%=contractor.title %></p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>   
+          <% for(let i =0; i<(num);i++){ %>
+            <div class="col" style="opacity: 25%;">
+              <div class="some-posts-posts">
+                <div class="card" style="width: 16rem;">
+                  <img class="card-img-top" style="background-color: dimgrey;" width="250px" height="143px" overflow="hidden">
+                  <div class="card-body">
+                    <h5 class="card-title">لا يوجد</h5>
+                    <p class="card-text"></p>
+                    <a href="#" class="btn btn-primary">لا يوجد</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+            <% } %>
+      </div>      
+    </div>
+
+  </section>
+
+
   <section class="contact-section">
-  <%- include('contact'); %>
   <div class="back_to_top"><a href="#"><i class="fa-solid fa-arrow-up-long fa-2xl" style="color: #fafafa;" id="arrow-up"></i></a></div>
   <div class="back_to_top"><a href="#" id="back" ><h3 > back to top </h3></a></div>
   <footer>
