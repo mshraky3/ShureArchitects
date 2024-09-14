@@ -7,7 +7,7 @@
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 90vh;
+  height: 140vh;
 }
 #img {
   background-image: url("../imges/sub-images/profile-img.jpg");
@@ -101,14 +101,15 @@
 .back_to_top{
   display: flex;
   justify-content: center;
-  margin-top: 3%;
   color: aliceblue;
+  padding-top: 1%
 }
 
 #back{
   text-decoration: none;
   color :rgb(255, 255, 255);
 }
+
 
 .contact-section{
   color: aliceblue;
@@ -119,6 +120,57 @@
   width: 100%;
   height: 100%;
 }
+
+
+.some-posts{
+  background-image: url("../imges/img12.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 130vh;
+}
+
+.some-posts div a , .some-posts div button ,.some-posts div  {
+  color: aliceblue;
+}
+
+
+.some-posts div button {
+  width:125%
+}
+
+.some-posts-contaner{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  font-size: x-large;
+  padding:  0% 0% 3%;
+  
+}
+
+.some-posts-contaner div{
+  padding: 2% 1% 1%;
+}
+
+.some-posts{
+  padding: 0% 5% 1%;
+  justify-self: center;
+  align-self: center;
+}
+
+.center-posts {
+  display: flex;
+  justify-content: center;
+
+}
+
+
+.some-posts div{
+  background-color: transparent !important;
+
+}
+
 @media (max-width: 800px) { /* Adjust breakpoint as needed */
   .row {
       flex-direction: column;
@@ -132,7 +184,34 @@
     margin: 1%;
     padding: 2%;
   }
-  
+
+  #img {
+    background-image: url("../imges/phone.jpg");
+    height: 100vh;
+    width: 100%;
+  } 
+
+  .some-posts{
+    width: 100%;
+    height: 350vh;
+    background-repeat: repeat-x
+  }
+
+  .some-posts p , .some-posts div  , .some-posts button{
+      font-size: small;
+  }
+  .some-posts-text{
+    width: fit-content;
+    margin-right:  3%;
+    margin-left: 4%;
+  }
+  .some-posts-btn .some-posts-btn{
+    padding: 0%;
+  }
+  .card-body{
+    width: 100%;
+    height: 0%;
+  }
 }
 
 @media (max-width: 1024px) { /* Adjust breakpoint as needed */
