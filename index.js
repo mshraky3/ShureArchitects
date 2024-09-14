@@ -51,10 +51,119 @@ let user = {}
 let stat_mess = "";
 
 app.get("/", async (req, res) => {
-  res.render("profile.ejs")
+  try {
+    const companyResult = await db.query(`
+      SELECT ci.id, ci.company_name, ci.location, ci.number, ci.rating, ci.details, ci.username, ci.title, ci2.image
+      FROM company_info ci
+      LEFT JOIN company_images ci2 ON ci.id = ci2.company_id
+    `);
+      
+    const companies = {};
+    companyResult.rows.forEach(row => {
+      if (!companies[row.id]) {
+        companies[row.id] = {
+          id: row.id,
+          name: row.company_name,
+          location: row.location,
+          number: row.number,
+          rating: row.rating,
+          details: row.details,
+          username: row.username,
+          title: row.title,
+          images: []
+        };
+      }
+      if (row.image) {
+        companies[row.id].images.push(row.image.toString('base64'));
+      }
+    });
+  
+    const companiesArray = Object.values(companies);
+    const randomCompanies = [];
+    const totalCompanies = companiesArray.length;
+  
+    for (let i = 0; i < 4 && i < totalCompanies; i++) {
+      const randomIndex = Math.floor(Math.random() * companiesArray.length);
+      randomCompanies.push(companiesArray.splice(randomIndex, 1)[0]);
+    }
+
+      try {
+        const contractorResult = await db.query(`
+        SELECT ci.id, ci.name, ci.location, ci.number, ci.details, ci.username,ci.title , ci2.image
+        FROM contractor_info ci
+        LEFT JOIN contractor_images ci2 ON ci.id = ci2.contractor_id
+      `);
+        const contractors = {};
+        contractorResult.rows.forEach(row => {
+          if (!contractors[row.id]) {
+            contractors[row.id] = {
+              id: row.id,
+              name: row.name,
+              location: row.location,
+              number: row.number,
+              details: row.details,
+              username: row.username,
+              title: row.title,
+              images: []
+            };
+          }
+          if (row.image) {
+            contractors[row.id].images.push(row.image.toString('base64'));
+          }
+        });
+        const contractorsArray = Object.values(contractors);
+        const randomContractor = [];
+        const totalContractor = contractorsArray.length; 
+    for (let i = 0; i < 4 && i < totalContractor; i++) {
+      const randomIndex = Math.floor(Math.random() * contractorsArray.length);
+      randomContractor.push(contractorsArray.splice(randomIndex, 1)[0]);
+    }
+
+    console.log(randomContractor)
+    await res.render("profile.ejs", {
+      date: year,
+      username: user.username,
+      companies: randomCompanies,
+      contractors:randomContractor,
+      type: user.type,
+      is_user:is_user,
+      num:4-(randomContractor.length),
+      Cnum:4-(randomCompanies.length)
+    });
+
+    }catch(error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+      }
+} catch (error) {
+  console.error(error);
+  res.status(500).send("Internal Server Error");
+}
 })
 
 
+
+app.post("/profile", async (req, res) => {
+  try {
+    const username = await db.query("select * from users where username = $1", [req.body.username])
+    if (username.rows[0].password === req.body.password) {
+      is_user = true
+      const result = await db.query("select type from users where username = $1", [req.body.username])
+      const type = result.rows[0].type
+      user = {
+        username: username.rows[0].username,
+        type: result.rows[0].type
+      }
+      res.redirect("/")
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    console.error(err)
+    res.redirect("/")
+  }
+
+})
 
 
 
@@ -67,9 +176,8 @@ app.post("/upload", async (req, res) => {
   const imageArray = Array.isArray(images) ? images : [images];
   try {
     for (const image of imageArray) {
-      const buffer = image.data; upload_new_post
+      const buffer = image.data; 
       const name = image.name;
-      const path = __dirname + "/public/upload_images/" + name;
       await db.query("INSERT INTO images(name, data) VALUES ($1, $2)", [name, buffer]);
     }
 
@@ -97,43 +205,9 @@ app.get("/list", (req, res) => {
   res.render("list.ejs")
 })
 
-app.get("/profile", (req, res) => {
-  if (is_user) {
-    res.render("profile.ejs", {
-      date: year,
-      type: user.type,
-      username: user.username
-    })
-  } else
-    res.render("profile.ejs", { date: year })
-})
 
-app.post("/profile", async (req, res) => {
-  try {
-    const username = await db.query("select * from users where username = $1", [req.body.username])
-    if (username.rows[0].password === req.body.password) {
-      is_user = true
-      const result = await db.query("select type from users where username = $1", [req.body.username])
-      const type = result.rows[0].type
-      user = {
-        username: username.rows[0].username,
-        type: result.rows[0].type
-      }
-      res.render("profile.ejs", {
-        date: year,
-        type: type,
-        is_user: is_user,
-        username: username.rows[0].username
-      })
-    } else {
-      res.redirect("/login")
-    }
-  } catch (err) {
-    console.error(err)
-    res.redirect("/")
-  }
 
-})
+
 
 app.post("/register", async (req, res) => {
   const email = req.body.username;
@@ -174,7 +248,8 @@ let list_of_type = ""
 
 app.post("/upload_post", (req, res) => {
   list_of_type = req.body.upload_type;
-  res.render("upload_post.ejs", { user: user, list_type: req.body.upload_type })
+  console.log(user.username)
+  res.render("upload_post.ejs", { user: user.username, list_type: req.body.upload_type })
 })
 
 
@@ -243,8 +318,6 @@ app.post("/upload_new_post", async (req, res) => {
         );
       }
     }
-    console.log('here')
-
     res.redirect("/uploaded");
   } catch (error) {
     console.error("Error uploading data:", error);
@@ -258,15 +331,13 @@ app.post("/upload_new_post", async (req, res) => {
 app.get("/uploaded", async (req, res) => {
   const type = list_of_type
   try {
-
     if (type === "engeneering") {
       try {
         const companyResult = await db.query(`
       SELECT ci.id, ci.company_name, ci.location, ci.number, ci.rating, ci.details, ci.username, ci.title , ci2.image
       FROM company_info ci
       LEFT JOIN company_images ci2 ON ci.id = ci2.company_id
-      WHERE ci.username = $1
-    `, [user.username]);
+    `);
 
         const companies = {};
         companyResult.rows.forEach(row => {
@@ -301,8 +372,8 @@ app.get("/uploaded", async (req, res) => {
         SELECT ci.id, ci.name, ci.location, ci.number, ci.details, ci.username,ci.title , ci2.image
         FROM contractor_info ci
         LEFT JOIN contractor_images ci2 ON ci.id = ci2.contractor_id
-        WHERE ci.username = $1
-      `, [user.username]);
+        
+      `);
         const contractors = {};
         contractorResult.rows.forEach(row => {
           if (!contractors[row.id]) {
@@ -371,16 +442,14 @@ app.get("/uploaded", async (req, res) => {
 
 app.post("/uploaded", async (req, res) => {
   try {
-
-
     if (req.body.upload_type === "engeneering") {
       try {
         const companyResult = await db.query(`
       SELECT ci.id, ci.company_name, ci.location, ci.number, ci.rating, ci.details, ci.username,ci.title , ci2.image
       FROM company_info ci
       LEFT JOIN company_images ci2 ON ci.id = ci2.company_id
-      WHERE ci.username = $1
-    `, [user.username]);
+     
+    `);
 
         const companies = {};
         companyResult.rows.forEach(row => {
@@ -415,8 +484,8 @@ app.post("/uploaded", async (req, res) => {
         SELECT ci.id, ci.name, ci.location, ci.number, ci.details, ci.username,ci.title , ci2.image
         FROM contractor_info ci
         LEFT JOIN contractor_images ci2 ON ci.id = ci2.contractor_id
-        WHERE ci.username = $1
-      `, [user.username]);
+       
+      `);
         const contractors = {};
         contractorResult.rows.forEach(row => {
           if (!contractors[row.id]) {
@@ -442,15 +511,12 @@ app.post("/uploaded", async (req, res) => {
         res.status(500).send("An error occurred while fetching data.");
       }
     } else {
-
-
       try {
         const freelancerResult = await db.query(`
       SELECT fi.id, fi.name, fi.location, fi.number, fi.details, fi.username, fi.title ,fi2.image
       FROM freelancer_info fi
       LEFT JOIN freelancer_images fi2 ON fi.id = fi2.freelancer_id
-      WHERE fi.username = $1
-    `, [user.username]);
+    `);
 
         const freelancers = {};
         freelancerResult.rows.forEach(row => {
