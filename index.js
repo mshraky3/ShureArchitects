@@ -32,12 +32,16 @@ const date = new Date()
 const year = date.getFullYear()
 
 const db = new pg.Client({
-  password: "gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
-  host: "dpg-crd1mqg8fa8c73bg324g-a",
-  database: "users_x5qf",
   user: "users_x5qf_user",
-  port: 5432
-})
+  host: "dpg-crd1mqg8fa8c73bg324g-a.oregon-postgres.render.com",
+  port: 5432,
+  password: "gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
+  database: "users_x5qf",
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
 
 // const db = new pg.Client({ password: "Ejc9c123", host: "localhost", database: " Authentication", user: "postgres", port: 5432 })
 
