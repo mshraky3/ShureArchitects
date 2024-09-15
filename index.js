@@ -31,15 +31,15 @@ const upload = multer({ storage: storage });
 const date = new Date()
 const year = date.getFullYear()
 
-const db = new pg.Client({
-  password: "gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
-  host: "dpg-crd1mqg8fa8c73bg324g-a",
-  database: "users_x5qf",
-  user: "users_x5qf_user",
-  port: 5432
-})
+// const db = new pg.Client({
+//   password: "gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
+//   host: "dpg-crd1mqg8fa8c73bg324g-a",
+//   database: "users_x5qf",
+//   user: "users_x5qf_user",
+//   port: 5432
+// })
 
-// const db = new pg.Client({ password: "Ejc9c123", host: "localhost", database: " Authentication", user: "postgres", port: 5432 })
+const db = new pg.Client({ password: "Ejc9c123", host: "localhost", database: " Authentication", user: "postgres", port: 5432 })
 
 db.connect()
 
@@ -57,7 +57,7 @@ app.get("/", async (req, res) => {
       FROM company_info ci
       LEFT JOIN company_images ci2 ON ci.id = ci2.company_id
     `);
-      
+
     const companies = {};
     companyResult.rows.forEach(row => {
       if (!companies[row.id]) {
@@ -77,68 +77,68 @@ app.get("/", async (req, res) => {
         companies[row.id].images.push(row.image.toString('base64'));
       }
     });
-  
+
     const companiesArray = Object.values(companies);
     const randomCompanies = [];
     const totalCompanies = companiesArray.length;
-  
+
     for (let i = 0; i < 4 && i < totalCompanies; i++) {
       const randomIndex = Math.floor(Math.random() * companiesArray.length);
       randomCompanies.push(companiesArray.splice(randomIndex, 1)[0]);
     }
 
-      try {
-        const contractorResult = await db.query(`
+    try {
+      const contractorResult = await db.query(`
         SELECT ci.id, ci.name, ci.location, ci.number, ci.details, ci.username,ci.title , ci2.image
         FROM contractor_info ci
         LEFT JOIN contractor_images ci2 ON ci.id = ci2.contractor_id
       `);
-        const contractors = {};
-        contractorResult.rows.forEach(row => {
-          if (!contractors[row.id]) {
-            contractors[row.id] = {
-              id: row.id,
-              name: row.name,
-              location: row.location,
-              number: row.number,
-              details: row.details,
-              username: row.username,
-              title: row.title,
-              images: []
-            };
-          }
-          if (row.image) {
-            contractors[row.id].images.push(row.image.toString('base64'));
-          }
-        });
-        const contractorsArray = Object.values(contractors);
-        const randomContractor = [];
-        const totalContractor = contractorsArray.length; 
-    for (let i = 0; i < 4 && i < totalContractor; i++) {
-      const randomIndex = Math.floor(Math.random() * contractorsArray.length);
-      randomContractor.push(contractorsArray.splice(randomIndex, 1)[0]);
-    }
-
-    console.log(randomContractor)
-    await res.render("profile.ejs", {
-      date: year,
-      username: user.username,
-      companies: randomCompanies,
-      contractors:randomContractor,
-      type: user.type,
-      is_user:is_user,
-      num:4-(randomContractor.length),
-      Cnum:4-(randomCompanies.length)
-    });
-
-    }catch(error) {
-        console.error(error);
-        res.status(500).send("Internal Server Error");
+      const contractors = {};
+      contractorResult.rows.forEach(row => {
+        if (!contractors[row.id]) {
+          contractors[row.id] = {
+            id: row.id,
+            name: row.name,
+            location: row.location,
+            number: row.number,
+            details: row.details,
+            username: row.username,
+            title: row.title,
+            images: []
+          };
+        }
+        if (row.image) {
+          contractors[row.id].images.push(row.image.toString('base64'));
+        }
+      });
+      const contractorsArray = Object.values(contractors);
+      const randomContractor = [];
+      const totalContractor = contractorsArray.length;
+      for (let i = 0; i < 4 && i < totalContractor; i++) {
+        const randomIndex = Math.floor(Math.random() * contractorsArray.length);
+        randomContractor.push(contractorsArray.splice(randomIndex, 1)[0]);
       }
-} catch (error) {
-  console.error(error);
-  res.status(500).send("Internal Server Error");
-}
+
+      console.log(randomContractor)
+      await res.render("profile.ejs", {
+        date: year,
+        username: user.username,
+        companies: randomCompanies,
+        contractors: randomContractor,
+        type: user.type,
+        is_user: is_user,
+        num: 4 - (randomContractor.length),
+        Cnum: 4 - (randomCompanies.length)
+      });
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
 })
 
 
@@ -176,7 +176,7 @@ app.post("/upload", async (req, res) => {
   const imageArray = Array.isArray(images) ? images : [images];
   try {
     for (const image of imageArray) {
-      const buffer = image.data; 
+      const buffer = image.data;
       const name = image.name;
       await db.query("INSERT INTO images(name, data) VALUES ($1, $2)", [name, buffer]);
     }

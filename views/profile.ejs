@@ -79,7 +79,7 @@
   <section class="some-posts">
     <div class="some-posts-contaner">
       <div class="some-posts-text">
-        المشاريع المطروحة
+        المشاريع المطروحة-مكاتب هندسية
       </div>
       <div class="some-posts-btn">
         <form action="/uploaded" method="post"> <button class="btn btn-info some-posts-btn" name="upload_type" value="engeneering">المزيد</button> </form> </form>
@@ -98,21 +98,21 @@
                 <div class="card-body">
                   <h5 class="card-title"><%=company.name %></h5>
                   <p class="card-text"><%=company.title %></p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <a href="/post/engeneering/<%=contractor.id%>" class="btn btn-primary">المزيد من التفاصيل</a>
                 </div>
               </div>
             </div>
           </div>
           <% }) %>  
           <% for(let x = 0; x<Cnum;x++){ %>
-              <div class="col" style="opacity: 25%;">
+              <div class="col none" style="opacity: 50%;" style="background-color: rgb(161, 158, 159);">
                 <div class="some-posts-posts">
-                  <div class="card" style="width: 16rem;">
-                    <img class="card-img-top" style="background-color: dimgrey;" width="250px" height="143px" overflow="hidden">
-                    <div class="card-body">
-                      <h5 class="card-title">لا يوجد</h5>
+                  <div class="card" style="width: 16rem;" >
+                    <img class="card-img-top" style="background-color: rgb(161, 158, 159);" width="250px" height="143px" overflow="hidden">
+                    <div class="">
+                      <h5 class="">لا يوجد</h5>
                       <p class="card-text"></p>
-                      <a href="#" class="btn btn-primary">لا يوجد</a>
+                       
                     </div>
                   </div>
                 </div>
@@ -123,7 +123,7 @@
     </div>
     <div class="some-posts-contaner">
       <div class="some-posts-text">
-        المشاريع المطروحة
+      المشاريع المطروحة-مقاولات
       </div>
       <div class="some-posts-btn">
         <form action="/uploaded" method="post"> <button class="btn btn-info some-posts-btn" name="upload_type" value="contractor">المزيد</button> </form> </form>
@@ -141,25 +141,25 @@
                 <div class="card-body">
                   <h5 class="card-title"><%=contractor.name %></h5>
                   <p class="card-text"><%=contractor.title %></p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <a href="/post/contractor/<%=contractor.id%>" class="btn btn-primary">المزيد من التفاصيل</a>
                 </div>
               </div>
             </div>
           </div>
           <% }) %>   
           <% for(let i =0; i<(num);i++){ %>
-            <div class="col" style="opacity: 25%;">
+            <div class="col none" style="opacity: 50%;">
               <div class="some-posts-posts">
                 <div class="card" style="width: 16rem;">
-                  <img class="card-img-top" style="background-color: dimgrey;" width="250px" height="143px" overflow="hidden">
-                  <div class="card-body">
-                    <h5 class="card-title">لا يوجد</h5>
+                  <img class="card-img-top" style="background-color: rgb(161, 158, 159);" width="250px" height="143px" overflow="hidden">
+                  <div class="">
+                    <h5 class="card-title" >لا يوجد</h5>
                     <p class="card-text"></p>
-                    <a href="#" class="btn btn-primary">لا يوجد</a>
                   </div>
                 </div>
               </div>
             </div>
+          
             <% } %>
             <% } %>
       </div>      
