@@ -31,15 +31,15 @@ const upload = multer({ storage: storage });
 const date = new Date()
 const year = date.getFullYear()
 
-// const db = new pg.Client({
-//   password: "gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
-//   host: "dpg-crd1mqg8fa8c73bg324g-a",
-//   database: "users_x5qf",
-//   user: "users_x5qf_user",
-//   port: 5432
-// })
+const db = new pg.Client({
+  password: "gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
+  host: "dpg-crd1mqg8fa8c73bg324g-a",
+  database: "users_x5qf",
+  user: "users_x5qf_user",
+  port: 5432
+})
 
-const db = new pg.Client({ password: "Ejc9c123", host: "localhost", database: " Authentication", user: "postgres", port: 5432 })
+// const db = new pg.Client({ password: "Ejc9c123", host: "localhost", database: " Authentication", user: "postgres", port: 5432 })
 
 db.connect()
 
