@@ -31,30 +31,30 @@ const upload = multer({ storage: storage });
 const date = new Date()
 const year = date.getFullYear()
 
-// const db = new pg.Client({
-//   user: "users_x5qf_user",
-//   host: "dpg-crd1mqg8fa8c73bg324g-a",
-//   port: 5432,
-//   password: "gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
-//   database: "users_x5qf",
-// })
+const db = new pg.Client({
+  user: "users_x5qf_user",
+  host: "dpg-crd1mqg8fa8c73bg324g-a",
+  port: 5432,
+  password: "gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
+  database: "users_x5qf",
+})
 
 // const db = new pg.Client({ password: "Ejc9c123", host: "localhost", database: " Authentication", user: "postgres", port: 5432 })
 
 
 
 
-const db = new pg.Client({
-  user: "users_x5qf_user",
-  host: "dpg-crd1mqg8fa8c73bg324g-a.oregon-postgres.render.com",
-  port: 5432,
-  password: "gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
-  database: "users_x5qf",
-  ssl: {
-    rejectUnauthorized: false
-  },
-  idleTimeoutMillis: 30000 // 30 seconds
-});
+// const db = new pg.Client({
+//   user: "users_x5qf_user",
+//   host: "dpg-crd1mqg8fa8c73bg324g-a.oregon-postgres.render.com",
+//   port: 5432,
+//   password: "gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",
+//   database: "users_x5qf",
+//   ssl: {
+//     rejectUnauthorized: false
+//   },
+//   idleTimeoutMillis: 30000 // 30 seconds
+// });
 
 
 db.connect()
