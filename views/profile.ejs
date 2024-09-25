@@ -4,32 +4,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShureArchitects</title>
+  <title>DASH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../public/imges/logo.png">
   <link rel="stylesheet" href="../public/style/profile.css">
 </head>
 
 <body id="body">
   <section id="img">
-    <%- include('nav'); %>
+    <%-include('nav');%>
   </section>
   <hr class="hr">
   <section>
     <div class="back">
-      <div class="container-fluid">
+      <div class="container">
         <div class="row">
           <div class="col col col-lg-4">
             <div class="center-contaner">
               <div class="type-contaner">
                 <div class="type-cards">
                   <div class="main-link"> <a href="/list">مكاتب هندسية</a></div>
-                  <div class="link"> <form action="/uploaded" method="post"> <style> </style> <button name="upload_type" value="engeneering">المشاريع المطروحة</button> </form></div>
-                  <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info" name="upload_type" value="engeneering">المزيد</button> </form> </div>
-                  <% if(locals.type==="user" || locals.type==="admin" ){ %>
-                  <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="engeneering">اعرض مشروعك</button></form></div>
-                  <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info" name="upload_type" value="engeneering">المزيد</button> </form> </div>
+                  <div class="link"> <form action="/uploaded" method="post"> <style> </style> <button name="upload_type" value="company">المشاريع المطروحة</button> </form></div>
+                  <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info" name="upload_type" value="company">المزيد</button> </form> </div>
+                  <% if(locals.type ==='user'){ %>
+                  <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="company">اعرض مشروعك</button></form></div>
+                  <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info" name="upload_type" value="company">المزيد</button> </form> </div>
+                  <% }else if (locals.type){ %>
+                    <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="company">أضف مشروعك الي قائمة اعملاك</button></form></div>
+                    <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info" name="upload_type" value="company">المزيد</button> </form> </div>
                   <% }else{ %>
-                  <div class="link2"><form action="/login" method="get"><button name="upload_type" value="engeneering">اعرض مشروعك</button></form></div>
-                  <div class="arrow2"> <form action="/login" method="get"> <button class="btn btn-info" name="upload_type" value="engeneering">المزيد</button> </form> </div>
+                  <div class="link2"><form action="/login" method="get"><button name="upload_type" value="company">اعرض مشروعك</button></form></div>
+                  <div class="arrow2"> <form action="/login" method="get"> <button class="btn btn-info" name="upload_type" value="company">المزيد</button> </form> </div>
                   <% } %>
                 </div>
               </div>
@@ -42,9 +49,12 @@
                   <div class="main-link"> <a href="/list">مقاول</a></div>
                   <div class="link"> <form action="/uploaded" method="post"> <style> button { background: none; border: none; outline: none; box-shadow: none; } </style> <button name="upload_type" value="contractor">المشاريع المطروحة</button> </form></div>
                   <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info" name="upload_type" value="contractor">المزيد</button> </form> </div>
-                  <% if(locals.type==="user" || locals.type==="admin" ){ %>
+                  <% if(locals.type==="user"){ %>
                   <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="contractor">اعرض مشروعك</button></form></div>
                   <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info"  name="upload_type" value="contractor">المزيد</button> </form> </div>
+                  <% }else if (locals.type){ %>
+                    <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="contractor">أضف مشروعك الي قائمة اعملاك</button></form></div>
+                    <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info" name="upload_type" value="contractor">المزيد</button> </form> </div>
                   <% }else{ %>
                   <div class="link2"><form action="/login" method="get"><button name="upload_type" value="contractor">اعرض مشروعك</button></form></div>
                   <div class="arrow2"> <form action="/login" method="get"> <button class="btn btn-info" name="upload_type" value="contractor">المزيد</button> </form> </div>
@@ -60,9 +70,12 @@
                   <div class="main-link"> <a href="/list">افراد|freelancer</a></div>
                   <div class="link"> <form action="/uploaded" method="post"> <style> button { background: none; border: none; outline: none; box-shadow: none; } </style> <button name="upload_type" value="freelancer">المشاريع المطروحة</button> </form></div>
                   <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info" name="upload_type" value="freelancer">المزيد</button> </form> </div>
-                  <% if(locals.type==="user" || locals.type==="admin" ){ %>
+                  <% if(locals.type==="user"){ %>
                   <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="freelancer">اعرض مشروعك</button></form></div>
                   <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info" name="upload_type" value="freelancer">المزيد</button> </form> </div>
+                  <% }else if (locals.type){ %>
+                    <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="freelancer">أضف مشروعك الي قائمة اعملاك</button></form></div>
+                    <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info" name="upload_type" value="freelancer">المزيد</button> </form> </div>
                   <% }else{ %>
                   <div class="link2"><form action="/login" method="get"><button name="upload_type" value="freelancer">اعرض مشروعك</button></form></div>
                   <div class="arrow2"> <form action="/login" method="get"> <button class="btn btn-info" name="upload_type" value="freelancer">المزيد</button> </form> </div>
@@ -82,7 +95,7 @@
         المشاريع المطروحة-مكاتب هندسية
       </div>
       <div class="some-posts-btn">
-        <form action="/uploaded" method="post"> <button class="btn btn-info some-posts-btn" name="upload_type" value="engeneering">المزيد</button> </form> </form>
+        <form action="/uploaded" method="post"> <button class="btn btn-info some-posts-btn" name="upload_type" value="company">المزيد</button> </form> </form>
       </div>
     </div>
     <div class="center-posts">
@@ -98,7 +111,7 @@
                 <div class="card-body">
                   <h5 class="card-title"><%=company.name %></h5>
                   <p class="card-text"><%=company.title %></p>
-                  <a href="/post/engeneering/<%=contractor.id%>" class="btn btn-primary">المزيد من التفاصيل</a>
+                  <a href="/post/company/<%=company.id%>" class="btn btn-primary">المزيد من التفاصيل</a>
                 </div>
               </div>
             </div>
@@ -132,7 +145,7 @@
     <div class="center-posts">
         <div class="row">
         
-        <%if(locals.contractors.length){ %>
+        <%if(locals.num){ %>
         <% contractors.forEach(contractor => { %>
           <div class="col">
             <div class="some-posts-posts">
@@ -174,7 +187,7 @@
   <footer>
     <div class="footer">
       <h1 class="copy">
-        all copyright for ShureArchitects
+        all copyright for DASH
         year
         <% if(locals.date){ %>
         <%=date %>

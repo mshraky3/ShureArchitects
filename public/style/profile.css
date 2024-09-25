@@ -1,5 +1,8 @@
 #body{
   width: 100%;
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 .back{
   background-image: url("../imges/sub-images/options-img.jpg");

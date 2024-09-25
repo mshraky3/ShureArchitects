@@ -9,7 +9,8 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <title><%= type %></title>
+  <title>DASH <%= type %></title>
+  <link rel="icon" type="image/x-icon" href="../public/imges/logo.png">
 </head>
 <style>
   .p {
@@ -19,7 +20,7 @@
 <body>
   <header class="navbar navbar-expand-lg bg-black fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">ShureArchitects</a>
+      <a class="navbar-brand" href="/">DASH</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -47,9 +48,9 @@
   <center>
 
   
-  <div class="container mt-5 pt-5">
+  <div class="">
     <h1 class="title text-center">
-      <%= type === 'engeneering' ? 'Engineering Firms' : type === 'contractor' ? 'Contractors' : 'Freelancers' %>
+      <%= type === 'company' ? 'Engineering Firms' : type === 'contractor' ? 'Contractors' : 'Freelancers' %>
     </h1>
     <hr>
     <div class="content">
@@ -65,7 +66,7 @@
             <div class="carousel-inner">
               <% data.images.forEach(function(image, index) { %>
               <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-                <img class="d-block w-100" src="data:image/jpeg;base64,<%= image %>" alt="Image">
+                <img class="d-block w-100" src="data:image/jpeg;base64,<%= image %>" alt="Image" style="width: 2080px;">
               </div>
               <% }); %>
             </div>
@@ -82,7 +83,7 @@
         <div class="div2">
           <div class="d-flex">
             <p class="font-weight-bold mr-2">Name:</p>
-            <p><%= data.name %></p>
+            <p><%= data.post_title %></p>
           </div>
         </div>
         <div class="div3">
@@ -93,8 +94,8 @@
         </div>
         <div class="div4">
           <div class="d-flex">
-            <p class="font-weight-bold mr-2">Number:</p>
-            <p><%= data.number %></p>
+            <p class="font-weight-bold mr-2">account:</p>
+            <p><%= data.account_name %></p>
           </div>
         </div>
         <div class="div5">
@@ -104,33 +105,164 @@
           </div>
         </div>
         <div class="div6">
-            <div class="">
                 <div class="more-details">
-                  <h2>More Details</h2>
-                </div>
-                <div class="">
-                  <h4><%= data.details %></h4>
-                </div>
+                  <h4 style="margin-bottom:10%;"><a href="/account/account/<%=data.account_id%>" style="color:rgb(60, 109, 216);"> view account</a></h4>
               </div>
         </div>
 
       </div>
-
+      <div class="deteils">
+        <h4>  more details</h4>
+        <h6><%= data.description %></h6>
+      </div>
     </div>
+ <!-- comment style  -->
+    <style>
+      body {
+        font-family: "Playfair Display", serif;
+        font-optical-sizing: auto;
+      
+        font-style: normal;
+      }
+      .comments-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      .comment-section h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      
+      .comment-form {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .comment-form textarea {
+        resize: none;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+      }
+      
+      .comment-form button {
+        align-self: flex-end;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+      }
+      
+      .comment-form button:hover {
+        background-color: #0056b3;
+      }
+      
+      .comment {
+        margin-bottom: 20px;
+      }
+      
+      .comment p {
+        margin: 0;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+      }
+      
+      .reply-form {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .reply-form textarea {
+        resize: none;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+      }
+      
+      .reply-form button {
+        align-self: flex-end;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #6c757d;
+        color: white;
+        cursor: pointer;
+      }
+      
+      .reply-form button:hover {
+        background-color: #5a6268;
+      }
+      
+      .reply {
+        margin-top: 10px;
+        margin-left: 20px;
+      }
+      
+      .reply p {
+        margin: 0;
+        padding: 10px;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+      }
+      .comment p {
+        text-align: left;
+      }
+    </style>
     <div class="comments mt-5">
       <div class="comments-container">
         <div class="comment-section">
           <h2>Comments</h2>
-          <form class="comment-form" name="comment">
-            <textarea class="form-control mb-3" placeholder="Write a comment..."></textarea>
+          <form class="comment-form" name="comment" action="/comment" method="POST">
+            <textarea class="form-control mb-3" name="comment_text" placeholder="Write a comment..."></textarea>
+            <input type="hidden" name="post_id" value="<%= data.post_id %>">
+            <input type="hidden" name="account_id" value="<%= account_id %>">
             <button type="submit" class="btn btn-primary">Post Comment</button>
           </form>
           <div class="comments">
-            <!-- Comments will be displayed here -->
+            <% if (comments && comments.length > 0) { %>
+              <% comments.forEach(comment => { %>
+                <div class="comment">
+                  <p><strong><%= comment.account_name %>:</strong> <%= comment.comment_text %></p>
+                  <form class="reply-form" name="reply" action="/reply" method="POST">
+                    <textarea class="form-control mb-3" name="reply_text" placeholder="Write a reply..."></textarea>
+                    <input type="hidden" name="comment_id" value="<%= comment.comment_id %>">
+                    <input type="hidden" name="account_id" value="<%= account_id %>">
+                    <button type="submit" class="btn btn-secondary">Reply to comment</button>
+                  </form>
+                  <div class="replies">
+                    <% if (comment.replies && comment.replies.length > 0) { %>
+                      <% comment.replies.forEach(reply => { %>
+                        <div class="reply">
+                          <p><strong><%= reply.account_name %>:</strong> <%= reply.reply_text %></p>
+                        </div>
+                      <% }) %>
+                    <% } else { %>
+                      <p>No replies yet.</p>
+                    <% } %>
+                  </div>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <p>No comments yet.</p>
+            <% } %>
           </div>
         </div>
       </div>
     </div>
+        
   </div></center>
   <script src="https://kit.fontawesome.com/6aa647ab54.js" crossorigin="anonymous"></script>
 </body>

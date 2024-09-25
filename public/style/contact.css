@@ -1,5 +1,8 @@
 .landing_page * {
-    font-family: Nunito, sans-serif;
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+
+  font-style: normal;
     filter: blur(0px);
   }
   
