@@ -44,6 +44,7 @@
     <h1 class="title"><%= type === 'company' ? 'Engineering Firms' : type === 'contractor' ? 'contractors' : 'freelancers' %></h1>
     <hr>
     <div class="content">
+      <style>.div1{aspect-ratio: 16/9; }  </style>
       <% companies.forEach(company => { %>
         <div class="parent">
           <img class="div1" src="data:image/jpeg;base64,<%= company.images[0] %>" alt="<%= company.name %> Logo" width="90%">

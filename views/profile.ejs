@@ -18,6 +18,10 @@
   </section>
   <hr class="hr">
   <section>
+    <style> .type-contaner{
+      aspect-ratio: 16/9;
+    }
+    </style>
     <div class="back">
       <div class="container">
         <div class="row">
@@ -67,7 +71,7 @@
             <div class="center-contaner">
               <div class="type-contaner">
                 <div class="type-cards">
-                  <div class="main-link"> <a href="/list">افراد|freelancer</a></div>
+                  <div class="main-link"> <a href="/list">افراد</a></div>
                   <div class="link"> <form action="/uploaded" method="post"> <style> button { background: none; border: none; outline: none; box-shadow: none; } </style> <button name="upload_type" value="freelancer">المشاريع المطروحة</button> </form></div>
                   <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info" name="upload_type" value="freelancer">المزيد</button> </form> </div>
                   <% if(locals.type==="user"){ %>

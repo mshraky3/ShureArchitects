@@ -5,47 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real-Time Chat</title>
 
-    <style>#send{padding:0%;margin:0%;width:0%}.account-img{width:60px;height:60px;border-radius:50%;margin-right:1%}body{font-family:sans-serif;margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background-color:#f5f5f5}#chat-container{width:98%;height:100vh;background-color:#fff;border-radius:5px;box-shadow:0 2px 5px rgb(0 0 0 / .1);padding:20px}#messages{height:90vh;overflow-y:scroll;border-radius:5px;padding:10px}.message{margin-bottom:1%;display:flex}.message p{margin-right:5px;margin-top:0%;color:snow;background-color:#333;padding:1%;max-width:200px;word-wrap:break-word;border-radius:10px}.message strong{margin-right:5px;margin-top:1%}.message-me{display:flex;flex-direction:row-reverse;margin-top:1%}.p-contaner{border-radius:10px;border:10px solid #333;background-color:#333;color:#ccc;max-width:200px;word-wrap:break-word}.p-time{display:flex;flex-direction:row-reverse}.timestamp{font-size:.8rem;color:#aaa}#chat-form{display:flex;margin-top:15px}#message-input{flex:1;padding:10px;border:1px solid #ccc;border-radius:5px}button{padding:10px 20px;background-color:#007bff;color:#fff;border:none;border-radius:5px;cursor:pointer}</style>
+    <style>#send{padding:0%;margin:0%;width:0%}.account-img{width:60px;height:60px;border-radius:50%;margin-right:1%}body{font-family:sans-serif;margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background-color:#f5f5f5}#chat-container{width:98%;height:100vh;background-color:#fff;border-radius:5px;box-shadow:0 2px 5px rgb(0 0 0 / .1);padding:20px}#messages{height:90vh;overflow-y:scroll;border-radius:5px;padding:10px}.message{margin-bottom:1%;display:flex}.message p{margin-right:5px;margin-top:0%;color:snow;background-color:#333;padding:1%;max-width:200px;word-wrap:break-word;border-radius:10px}.message strong{margin-right:5px;margin-top:1%}.message-me{display:flex;flex-direction:row-reverse;margin-top:1%}.p-contaner{border-radius:10px;border:10px solid #333;background-color:#333;color:#ccc;max-width:200px;word-wrap:break-word}.p-time{display:flex;flex-direction:row-reverse;margin-bottom:.5%}.timestamp{font-size:.8rem;color:#aaa}#chat-form{display:flex;margin-top:15px}#message-input{flex:1;padding:10px;border:1px solid #ccc;border-radius:5px}button{padding:10px 20px;background-color:#007bff;color:#fff;border:none;border-radius:5px;cursor:pointer}.seen-status{font-size:small;padding-top:-10px}.h6{margin-bottom:.5%}</style>
 <body>
-  <div id="chat-container">
-      <div id="messages">
-          <% messages.forEach(message => { %>
-            <%if(message.receiver_id!==accounts.id){ %>
-              <div class="message">
-                  <img class="account-img" src="data:image/jpeg;base64,<%=accounts.logo_image%>" alt="">
-                   <strong><%=accounts.name %>:</strong> 
-                   <p> <%=message.message_text %></p>
-                   <br>
-              </div>
-              <h6 class="h6"><%=message.timestamp.toString().split('G')[0]%></h6>
-              <% }else{ %>
-                <div class="message-me">
-                    <p>
-                        <div class="p-contaner">
-                            <%= message.message_text %>
-                        </div>
-                    </p>
-                </div>
-                <h6 class="p-time"><%=message.timestamp.toString().split('G')[0]%></h6>
+    <div id="chat-container">
+        <div id="messages">
+            <% messages.forEach(message => { %>
+                <% if (message.receiver_id !== accounts.id) { %>
+                    <div class="message" data-message-id="<%= message.id %>">
+                        <img class="account-img" src="data:image/jpeg;base64,<%= accounts.logo_image %>" alt="">
+                        <strong><%= accounts.name %>:</strong>
+                        <p><%= message.message_text %></p>
+                        <br>
+
+                    </div>
+                    <h6 class="h6"><%= message.timestamp.toString().split('G')[0] %></h6>
+                    <% if (message.read_status) { %>
+                        <span class="seen-status">Seen</span>
+                    <% } %>
+                <% } else { %>
+                    <div class="message-me" data-message-id="<%= message.id %>">
+                        <p>
+                            <div class="p-contaner">
+                                <%= message.message_text %>
+                            </div>
+                        </p>
+
+                    </div>
+                    <h6 class="p-time"><%= message.timestamp.toString().split('G')[0] %></h6>
+                    <% if (message.read_status) { %>
+                        <span  class="seen-status p-time">Seen</span>
+                    <% } %>
                 <% } %>
-          <% }) %>
-          <div id="send"></div>
-      </div>
-      <form id="chat-form" action="/send-message" method="POST">
-          <input type="hidden" name="sender_id" value="<%= sender_id %>"> <input type="hidden" name="receiver_id" value="<%= receiver_id %>"> <input type="text" name="message_text" id="message-input" placeholder="Type a message..." required>
-          <button type="submit">Send</button>
-      </form>
-  </div>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-      const socket = io();
-      socket.on('receiveMessage', (message) => {
-          const messageElement = document.createElement('div');
-          messageElement.classList.add('message');
-          messageElement.innerHTML = `<strong>${message.sender_id}:</strong> ${message.message_text} <span class="timestamp">${message.timestamp}</span>`;
-          document.getElementById('messages').appendChild(messageElement);
-      });
-  </script>
+            <% }) %>
+            <div id="send"></div>
+        </div>
+        <form id="chat-form" action="/send-message" method="POST">
+            <input type="hidden" name="sender_id" value="<%= sender_id %>">
+            <input type="hidden" name="receiver_id" value="<%= receiver_id %>">
+            <input type="text" name="message_text" id="message-input" placeholder="Type a message..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+    
+        socket.on('receiveMessage', (message) => {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.dataset.messageId = message.id;
+            messageElement.innerHTML = `<strong>${message.sender_id}:</strong> ${message.message_text} <span class="timestamp">${message.timestamp}</span>`;
+            document.getElementById('messages').appendChild(messageElement);
+        });
+    
+        socket.on('messageUpdated', (message) => {
+            const messageElements = document.querySelectorAll('.message, .message-me');
+            messageElements.forEach(element => {
+                if (element.dataset.messageId == message.id) {
+                    const seenStatus = element.querySelector('.seen-status');
+                    if (seenStatus) {
+                        seenStatus.textContent = 'Seen';
+                    } else {
+                        const span = document.createElement('span');
+                        span.classList.add('seen-status');
+                        span.textContent = 'Seen';
+                        element.appendChild(span);
+                    }
+                }
+            });
+        });
+    
+        document.getElementById('messages').addEventListener('scroll', () => {
+            const messages = document.querySelectorAll('.message, .message-me');
+            messages.forEach(message => {
+                if (message.getBoundingClientRect().top < window.innerHeight) {
+                    const messageId = message.dataset.messageId;
+                    socket.emit('messageSeen', messageId);
+                }
+            });
+        });
+    </script>
+    
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         const sectionId = 'send';
