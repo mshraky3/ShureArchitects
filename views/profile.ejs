@@ -21,7 +21,29 @@
     <style> .type-contaner{
       aspect-ratio: 16/9;
     }
+    .btn-info {
+      background-color: #b6bea5;
+      border-color: #a2aa93;
+      color: #fdfdfd;
+    }
+    .btn-info:hover{
+      background-color: #a2aa93;
+      border-color: #0f0f0e;
+      color: #fdfdfd;
+
+    }
+    .card-body a {
+      background-color: #b6bea5;
+      border-color: #a2aa93;
+      color: #0f0f0e;
+    }
+    .card-body a:hover {
+      background-color: #a2aa93;
+      border-color: #a2aa93;
+      color: #fdfdfd;
+    }
     </style>
+    
     <div class="back">
       <div class="container">
         <div class="row">
@@ -29,18 +51,20 @@
             <div class="center-contaner">
               <div class="type-contaner">
                 <div class="type-cards">
-                  <div class="main-link"> <a href="/list">مكاتب هندسية</a></div>
-                  <div class="link"> <form action="/uploaded" method="post"> <style> </style> <button name="upload_type" value="company">المشاريع المطروحة</button> </form></div>
-                  <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info" name="upload_type" value="company">المزيد</button> </form> </div>
+                  <div class="main-link"> <a href="/list/company">مكاتب هندسية</a></div>
+                  <div class="arrow2"> <form action="/list/company" method="get"> <button class="btn btn-info more" name="upload_type" value="company">المزيد</button> </form> </div>
+
+                  <div class="link"> <form action="/uploaded" method="post"> <style> </style> <button name="upload_type" value="company">المشاريع المعروضة</button> </form></div>
+                  <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info more" name="upload_type" value="company">المزيد</button> </form> </div>
                   <% if(locals.type ==='user'){ %>
                   <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="company">اعرض مشروعك</button></form></div>
-                  <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info" name="upload_type" value="company">المزيد</button> </form> </div>
+                  <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info more" name="upload_type" value="company">المزيد</button> </form> </div>
                   <% }else if (locals.type){ %>
                     <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="company">أضف مشروعك الي قائمة اعملاك</button></form></div>
-                    <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info" name="upload_type" value="company">المزيد</button> </form> </div>
+                    <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info more" name="upload_type" value="company">المزيد</button> </form> </div>
                   <% }else{ %>
                   <div class="link2"><form action="/login" method="get"><button name="upload_type" value="company">اعرض مشروعك</button></form></div>
-                  <div class="arrow2"> <form action="/login" method="get"> <button class="btn btn-info" name="upload_type" value="company">المزيد</button> </form> </div>
+                  <div class="arrow2"> <form action="/login" method="get"> <button class="btn btn-info more" name="upload_type" value="company">المزيد</button> </form> </div>
                   <% } %>
                 </div>
               </div>
@@ -50,18 +74,20 @@
             <div class="center-contaner">
               <div class="type-contaner">
                 <div class="type-cards">
-                  <div class="main-link"> <a href="/list">مقاول</a></div>
-                  <div class="link"> <form action="/uploaded" method="post"> <style> button { background: none; border: none; outline: none; box-shadow: none; } </style> <button name="upload_type" value="contractor">المشاريع المطروحة</button> </form></div>
-                  <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info" name="upload_type" value="contractor">المزيد</button> </form> </div>
+                  <div class="main-link"> <a href="/list/contractor">مقاولات</a></div>
+                  <div class="arrow"> <form action="/list/contractor" method="get"> <button class="btn btn-info more" name="upload_type" value="contractor">المزيد</button> </form> </div>
+
+                  <div class="link"> <form action="/uploaded" method="post"> <style> button { background: none; border: none; outline: none; box-shadow: none; } </style> <button name="upload_type" value="contractor">المشاريع المعروضة</button> </form></div>
+                  <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info more" name="upload_type" value="contractor">المزيد</button> </form> </div>
                   <% if(locals.type==="user"){ %>
                   <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="contractor">اعرض مشروعك</button></form></div>
-                  <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info"  name="upload_type" value="contractor">المزيد</button> </form> </div>
+                  <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info more"  name="upload_type" value="contractor">المزيد</button> </form> </div>
                   <% }else if (locals.type){ %>
                     <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="contractor">أضف مشروعك الي قائمة اعملاك</button></form></div>
-                    <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info" name="upload_type" value="contractor">المزيد</button> </form> </div>
+                    <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info more" name="upload_type" value="contractor">المزيد</button> </form> </div>
                   <% }else{ %>
                   <div class="link2"><form action="/login" method="get"><button name="upload_type" value="contractor">اعرض مشروعك</button></form></div>
-                  <div class="arrow2"> <form action="/login" method="get"> <button class="btn btn-info" name="upload_type" value="contractor">المزيد</button> </form> </div>
+                  <div class="arrow2"> <form action="/login" method="get"> <button class="btn btn-info more more" name="upload_type" value="contractor">المزيد</button> </form> </div>
                   <% } %>
                 </div>
               </div>
@@ -71,18 +97,19 @@
             <div class="center-contaner">
               <div class="type-contaner">
                 <div class="type-cards">
-                  <div class="main-link"> <a href="/list">افراد</a></div>
-                  <div class="link"> <form action="/uploaded" method="post"> <style> button { background: none; border: none; outline: none; box-shadow: none; } </style> <button name="upload_type" value="freelancer">المشاريع المطروحة</button> </form></div>
-                  <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info" name="upload_type" value="freelancer">المزيد</button> </form> </div>
+                  <div class="main-link"> <a href="/list/freelancer">افراد</a></div>
+                  <div class="arrow2"> <form action="/list/freelancer" method="get"> <button class="btn btn-info more" name="upload_type" value="freelancer">المزيد</button> </form> </div>
+                  <div class="link"> <form action="/uploaded" method="post"> <style> button { background: none; border: none; outline: none; box-shadow: none; } </style> <button name="upload_type" value="freelancer">المشاريع المعروضة</button> </form></div>
+                  <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info more" name="upload_type" value="freelancer">المزيد</button> </form> </div>
                   <% if(locals.type==="user"){ %>
                   <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="freelancer">اعرض مشروعك</button></form></div>
-                  <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info" name="upload_type" value="freelancer">المزيد</button> </form> </div>
+                  <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info more" name="upload_type" value="freelancer">المزيد</button> </form> </div>
                   <% }else if (locals.type){ %>
                     <div class="link2"><form action="/upload_post" method="post"><button name="upload_type" value="freelancer">أضف مشروعك الي قائمة اعملاك</button></form></div>
-                    <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info" name="upload_type" value="freelancer">المزيد</button> </form> </div>
+                    <div class="arrow2"> <form action="/upload_post" method="post"> <button class="btn btn-info more" name="upload_type" value="freelancer">المزيد</button> </form> </div>
                   <% }else{ %>
                   <div class="link2"><form action="/login" method="get"><button name="upload_type" value="freelancer">اعرض مشروعك</button></form></div>
-                  <div class="arrow2"> <form action="/login" method="get"> <button class="btn btn-info" name="upload_type" value="freelancer">المزيد</button> </form> </div>
+                  <div class="arrow2"> <form action="/login" method="get"> <button class="btn btn-info more" name="upload_type" value="freelancer">المزيد</button> </form> </div>
                   <% } %>
                 </div>
               </div>
@@ -96,10 +123,10 @@
   <section class="some-posts">
     <div class="some-posts-contaner">
       <div class="some-posts-text">
-        المشاريع المطروحة-مكاتب هندسية
+        المشاريع المعروضة-مكاتب هندسية
       </div>
       <div class="some-posts-btn">
-        <form action="/uploaded" method="post"> <button class="btn btn-info some-posts-btn" name="upload_type" value="company">المزيد</button> </form> </form>
+        <form action="/uploaded" method="post"> <button class="btn btn-info some-posts-btn more" name="upload_type" value="company">المزيد</button> </form> </form>
       </div>
     </div>
     <div class="center-posts">
@@ -140,7 +167,7 @@
     </div>
     <div class="some-posts-contaner">
       <div class="some-posts-text">
-      المشاريع المطروحة-مقاولات
+      المشاريع المعروضة-مقاولات
       </div>
       <div class="some-posts-btn">
         <form action="/uploaded" method="post"> <button class="btn btn-info some-posts-btn" name="upload_type" value="contractor">المزيد</button> </form> </form>
