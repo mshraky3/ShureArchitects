@@ -47,7 +47,7 @@
     <hr>
     <div class="content">
       <style>.div1{aspect-ratio: 16/9; }  </style>
-      <% if(locals.companies.images){ %>
+      <% if(!locals.companies.logo_image){ %>
       <% companies.forEach(company => { %>
         <div class="parent">
           <img class="div1" src="data:image/jpeg;base64,<%= company.images[0] %>" alt="<%= company.name %> Logo" width="90%">
@@ -84,7 +84,7 @@
       <% } else { %>
         <% Object.values(companies).forEach(company => { %>
           <div class="parent">
-            <% if (company.logo_image.length > 0) { %>
+            <% if (locals.companies.logo_image) { %>
               <img class="div1" src="data:image/jpeg;base64,<%= company.logo_image[0] %>" alt="<%= company.name %> Logo" width="60%" style="border-radius: 50% ; aspect-ratio: 1;; " >
             <% } %>
             <div class="div2">
