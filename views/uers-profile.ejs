@@ -10,8 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/public/style/list.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
 </head>
-<style>body{padding:0%;margin:0%;color:#fff;font-family:"Playfair Display",serif;font-optical-sizing:auto;font-style:normal}.content{padding:1%;background-image:url(data:image/jpeg;base64,<%=accounts.account_image%>);background-repeat:no-repeat;background-size:cover;background-position:center;width:100%;height:100vh;}.parent{background-color:#0000002e;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(6,1fr);grid-column-gap:6px;grid-row-gap:1px;height:98vh;padding-top:5%;justify-content:center;align-items:center;align-content:center}.div1{grid-area:2 / 1 / 6 / 3;width:320px;aspect-ratio:1;opacity:100%}.div2{grid-area:1 / 3 / 2 / 4}.div3{grid-area:1 / 4 / 2 / 5}.div4{grid-area:2 / 3 / 3 / 4}.div5{grid-area:2 / 4 / 3 / 5}.div6{grid-area:3 / 3 / 4 / 4}.div7{grid-area:3 / 4 / 4 / 5}.div8{grid-area:4 / 3 / 5 / 4}.div9{grid-area:4 / 4 / 5 / 5}.div10{grid-area:5 / 3 / 6 / 4}.div11{grid-area:5 / 4 / 6 / 5}.div12{grid-area:6 / 3 / 7 / 4}.div13{grid-area:6 / 4 / 7 / 5}.div14{grid-area:5 / 5 / 7 / 7;display:flex;justify-content:center;align-content:center;margin-bottom:-50px;border:2px solid;background-color:dimgrey;border:none;color:#fff;text-align:center;text-decoration:none;display:inline-block;transition-duration:0.4s;cursor:pointer}.div14:hover{background-color:#131212;color:#fff}.contact-section{color:aliceblue;background-image:url(../imges/contact-background.jpg);background-repeat:no-repeat;background-size:cover;background-position:center;width:100%;height:100%}.some-posts{background-image:url(../imges/img12.jpg);background-repeat:no-repeat;background-size:cover;background-position:center;width:100%;height:130vh}.some-posts div a,.some-posts div button,.some-posts div{color:aliceblue}.some-posts div button{width:125%}.some-posts-contaner{display:flex;flex-direction:row-reverse;justify-content:flex-start;font-size:x-large;padding:0% 0% 3%}.some-posts-contaner div{padding:2% 1% 1%}.some-posts{padding:0% 5% 1%;justify-self:center;align-self:center}.center-posts{display:flex;justify-content:center}.some-posts div{background-color:transparent!important}</style><style>.card{width:18rem}.container{padding-top:5%}</style><!-- media qeury style --><style>@media (max-width:780px){.content{padding:0%;margin:0%}.parent{display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(9,1fr);grid-column-gap:0;grid-row-gap:0}.div1{grid-area:1 / 1 / 3 / 3;display:flex;flex-direction:column;align-items:center;margin-top:33%;width:100%;padding:0% 0% 10%;aspect-ratio:1}.div1 .img{width:50%;margin-top:10%;border:1px solid #fff;border-radius:50%}.div1 img{border-radius:50%;aspect-ratio:1}.div2,.div3,.div4,.div5,.div6,.div7,.div8,.div9,.div10,.div11,.div12,.div13{grid-area:auto;width:100%;text-align:center}.div14{grid-area:9 / 1 / 10 / 3}.flex-start{text-align:center;display:grid}.some-posts{height:auto}.some-posts-contaner{flex-direction:column;align-items:center}.some-posts div{padding:5% 0}.col{margin-left:10%}}</style>
+<style>body{padding:0%;margin:0%;color:#000;font-family:"Playfair Display",serif;font-optical-sizing:auto;font-style:normal}.content{padding:1%;background-repeat:no-repeat;background-size:cover;background-position:center;width:100%;height:80vh;}.parent{display:grid;background-color:white;grid-template-columns:repeat(9,1fr);grid-template-rows:repeat(5,1fr);grid-column-gap:20px;grid-row-gap:0;height:65vh;padding-top:5%;justify-content:center;align-items:center;align-content:center}.div1{grid-area:2 / 1 / 5 / 3}.div2{grid-area:2 / 3 / 3 / 4}.div3{grid-area:2 / 4 / 3 / 5}.div4{grid-area:2 / 5 / 3 / 6}.div5{grid-area:2 / 6 / 3 / 7}.div6{grid-area:4 / 3 / 5 / 4}.div7{grid-area:4 / 4 / 5 / 5}.div8{grid-area:4 / 5 / 5 / 6}.div9{grid-area:4 / 6 / 5 / 7}.div10{grid-area:2 / 7 / 3 / 8}.div11{grid-area:2 / 8 / 3 / 9}.div12{grid-area:4 / 7 / 5 / 8}.div13{grid-area:4 / 8 / 5 / 9}.div14{grid-area:5 / 7 / 6 / 10}.div1{width:320px;aspect-ratio:1;opacity:100%}.div1 img{border-radius:50%;border:2px solid #050505;aspect-ratio:1}.div2{border-radius:12px;border-radius:12px;max-width:100%;word-wrap:break-word}.div3{border-radius:12px}.div4{max-width:100%;word-wrap:break-word;border-radius:12px}.div6{border-radius:12px;max-width:100%;word-wrap:break-word}.div8{border-radius:12px;max-width:100%;word-wrap:break-word}.div9{max-width:100px;word-wrap:break-word;font-size:small;display:flex;justify-content:start}.div10{border-radius:12px;max-width:100%;word-wrap:break-word}.div11{border-radius:12px}.div12{color:#131212;border-radius:12px;max-width:100%;word-wrap:break-word}.div13{border-radius:12px;border-radius:12px;padding:1%;margin-bottom:-5%}.div14{display:flex;justify-content:center;align-content:center;margin-bottom:-50px;border:2px solid;background-color:#a2aa93;border:none;color:#000;text-align:center;text-decoration:none;display:inline-block;transition-duration:0.4s;cursor:pointer;padding:3% 0% 3%;border-radius:8px}.div14:hover{background-color:#45663b;color:#fffdfd}.contact-section{color:aliceblue;background-image:url(../imges/contact-background.jpg);background-repeat:no-repeat;background-size:cover;background-position:center;width:100%;height:100%}.some-posts{background-image:url(../imges/img12.jpg);background-repeat:no-repeat;background-size:cover;background-position:center;width:100%;height:130vh}.some-posts div a,.some-posts div button,.some-posts div{color:aliceblue}.some-posts div button{width:125%}.some-posts-contaner{display:flex;flex-direction:row-reverse;justify-content:flex-start;font-size:x-large;padding:0% 0% 3%}.some-posts-contaner div{padding:2% 1% 1%}.some-posts{padding:0% 5% 1%;justify-self:center;align-self:center}.center-posts{display:flex;justify-content:center}.some-posts div{background-color:transparent!important}</style>
+
+<style>.card{width:18rem}.container{padding-top:5%}</style><!-- media qeury style --><style>@media (max-width:780px){.content{padding:0%;margin:0%}.parent{display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(9,1fr);grid-column-gap:0;grid-row-gap:0}.div1{grid-area:1 / 1 / 3 / 3;display:flex;flex-direction:column;align-items:center;margin-top:33%;width:100%;padding:0% 0% 10%;aspect-ratio:1}.div1 .img{width:50%;margin-top:10%;border:1px solid #fff;border-radius:50%}.div1 img{border-radius:50%;aspect-ratio:1}.div2,.div3,.div4,.div5,.div6,.div7,.div8,.div9,.div10,.div11,.div12,.div13{grid-area:auto;width:100%;text-align:center}.div9{display:flex;justify-content:end}.div14{grid-area:9 / 1 / 10 / 3}.flex-start{text-align:center;display:grid}.some-posts{height:auto}.some-posts-contaner{flex-direction:column;align-items:center}.some-posts div{padding:5% 0}.col{margin-left:10%}}</style>
 <body>
   <section>
     <div class="content">
@@ -23,7 +26,7 @@
           </div>
         </div>
         <div class="div2">
-           <strong>COMPANY NAME:</strong> 
+           <strong>NAME:</strong> 
         </div>
 		<div class="div3"> <strong><%=accounts.name %></strong> </div>
         <div class="div4">
@@ -35,22 +38,23 @@
         </div>
         <div class="div7"> <strong><%=accounts.number %></strong></div>
         <div class="div8">
-          <div class="flex-start">
-            <strong> RATING:  </strong>
-          <span class="rating"></span>
-          </div>
+            <strong>  services : </strong>
         </div>
-        <div class="div9"><strong>
+        <div class="div9">
+        <strong>
+          <%=accounts.description %>
+        </strong>
+        </div>
+        <div class="div10">
+          <strong>RATING:</strong>
+        </div>
+        <div class="div11"><strong>
           <% for(let i = 0  ;i < accounts.rating ; i++){ %>
             <label for="star5" style="color: orange;">&#9733;</label>
             <% } %>
-        </strong></div>
-        <div class="div10">
-          <strong>	services : </strong>
-        </div>
-        <div class="div11"><strong><%=accounts.description %></strong> </div>
+          </strong> </div>
         <div class="div12">
-          <h3 class="more-details" style="color: aliceblue;"><strong>account type</strong> <i class="fa-sharp-duotone fa-solid fa-arrow-right-long fa-fade fa-2xl"></i></h3>
+          <strong>type: </strong>
         </div>
         <div class="div13"><strong> <%= accounts.type %></strong></div>
         <div class="div14">
@@ -58,7 +62,7 @@
           <form action="/chat" method="post">
             <input type="hidden" name="receiver_id" value="<%=accounts.id %>">
             <input type="hidden" name="sender_id" value="<%=id%>">
-            <button type="submit" style="all:unset;"> chat</button>
+            <button type="submit" style="all:unset; color: #fff;"> chat</button>
           </form>
           <% }else { %>
             <form action="/my_chat/<%=id%>" method="get">
@@ -75,12 +79,64 @@
     </div>
   </section>
   <section>
-    <style>.feedback-form{max-width:400px;margin:0 auto}.center{display:flex;justify-content:center}.rating{margin-bottom:20px;display:flex;flex-direction:row-reverse;justify-content:flex-end}.rating input{display:none}.rating label{font-size:24px;cursor:pointer;color:#5b5c5e}.rating label:hover,.rating label:hover~label{color:orange}.rating input:checked~label{color:orange}.comment{margin-bottom:20px}.comment textarea{width:100%;height:100px;resize:none}.submit-btn{background-color:#b3c291;color:#fff;padding:10px 20px;border:none;cursor:pointer;border-radius:5px}</style>
+    <style>
+      .feedback-form {
+        max-width: 400px;
+        margin: 0 auto;
+        
+      }
+      .center{
+        display: flex;
+        justify-content: center;
+      }
+      .rating {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: row-reverse; /* this is the magic */
+        justify-content: flex-end;
+      }
+      
+      .rating input {
+        display: none;
+      }
+      
+      .rating label {
+        font-size: 24px;
+        cursor: pointer;
+        color: #5b5c5e;
+      }
+      
+      .rating label:hover,
+      .rating label:hover ~ label { /* reason why the stars are in reverse order in the html */
+        color: orange;
+      }
+      .rating input:checked ~ label {
+        color: orange;
+      }
+      
+      .comment {
+        margin-bottom: 20px;
+      }
+      .comment textarea {
+        width: 100%;
+        height: 100px;
+        resize: none;
+      }
+      
+      .submit-btn {
+        background-color: #b3c291;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+    </style>
 
     <%if(accounts.id !== id){ %>
       <% if(able_to_rate){ %>
     <div class="feedback-form">
-      <h2>Feedback Form</h2>
+      
       <div class="row">
         <div class="col">
           <div class="center">
@@ -115,7 +171,7 @@
     </style>
     <div class="f">
       <div class="c">
-        <h1 style="font-size: x-large; color:cornflowerblue;"> thanks for your time !</h1>
+        <h1 style="font-size: x-large; color:rgb(125, 176, 110);"> thanks for your time !</h1>
       </div>
     </div>
   <% } %>
@@ -123,39 +179,65 @@
 
   </section>
 
-  <section>
-<div class="container">
-    <div class="row">
-      <style>.card-img-top{aspect-ratio: 1; }  </style>
-      <% posts.forEach(post=>{ %>
-      <div class="col ">
-        <div class="card">
-          <img class="card-img-top" src="data:image/jpeg;base64,<%=post.images[0] %>" alt="Card image cap" s>
-          <div class="card-body">
-            <p class="card-text"><strong><%=post.title%> </strong></p>
-            <p class="card-text"><strong><%=post.location%></strong></p>
-            <p class="card-text"><strong><a href="/post/<%=accounts.account_type%>/<%=post.id%>" class="more-details">MORE DETAILS </a></strong> </p>
-            <% if(locals.id){ %>
-            <% if(accounts.id===id){ %>
-            <p class="card-text"> <a href="/post/delete/<%=post.id%>" class="more-details" style="color:red;">DELETE THE POST</a> </p>
-              <% } %>
-            <% } %>
+  <section> 
+             <style>
+            .card {
+              width: 100%;
+              margin: 1%;
+              aspect-ratio: 16/9;
+            }
+            .card-text {
+              text-align: center;
+            }
+
+          </style>
+    <div class="container">
+      <div class="row">
+        <style>.card-img-top { aspect-ratio: 13/9; height: 60vh; }</style>
+  
+        <% if (posts.length > 0) { %>
+        <div class="col-12">
+          <div id="postCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <% posts.forEach((post, index) => { %>
+              <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                <div class="card">
+                  <img class="card-img-top" src="data:image/jpeg;base64,<%= post.images[0] %>" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text"><strong><%= post.title %></strong></p>
+                    <p class="card-text"><strong><%= post.location %></strong></p>
+                    <p class="card-text"><strong><a href="/post/<%= accounts.account_type %>/<%= post.id %>" class="more-details">MORE DETAILS</a></strong></p>
+                    <% if (locals.id) { %>
+                    <% if (accounts.id === id) { %>
+                    <p class="card-text"><a href="/post/delete/<%= post.id %>" class="more-details" style="color:red;">DELETE THE POST</a></p>
+                    <% } %>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+            </div>
+            <a class="carousel-control-prev" href="#postCarousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#postCarousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
         </div>
-      </div>
-      <% }) %>
-      <div class="col">
-		<form action="/upload_post" method="post">
-        <div class="card"> 
-				<button name="upload_type" style="all: unset;" value="<%=accounts.account_type%>">
-          <input type="hidden" name="username" style="all: unset;" value="<%=accounts.username%>">
-					<img class="card-img-top"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUINNmG41IUxKTcy_GtSRhnbAhcIOd4MxoZw&s"  alt=""> 
-		    </input>
-		</form>
-		</div>
-        </div>
+        <% } %>
+  
+
       </div>
     </div>
-</div>	
   </section>
+  
+  
+  
 </body>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

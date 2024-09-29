@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +17,7 @@
   }
 </style>
 <body>
-  <header class="navbar navbar-expand-lg bg-black fixed-top">
+  <header style="background-color:  #a2aa93 !important;" class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">DASH</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +53,7 @@
     </h1>
     <hr>
     <div class="content">
-      <style>.d-block{aspect-ratio: 1; }  </style>
+      <style>.d-block{aspect-ratio: 16/9; }  </style>
       <div class="parent">
         <div class="div1">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -105,19 +104,39 @@
           </div>
         </div>
         <div class="div6">
+          <style> 
+            .more-details a{
+              text-decoration: none;
+              color: #a2aa93;
+            }
+            .more-details h4:hover{
+              text-decoration: none;
+              transform: scale(1.2);
+            }
+          </style>
                 <div class="more-details">
-                  <h4 style="margin-bottom:10%;"><a href="/account/account/<%=data.account_id%>" style="color:rgb(60, 109, 216);"> view account</a></h4>
+                  <h4 style="margin-bottom:10%; color:#a2aa93;"><a href="/account/account/<%=data.account_id%>"> view account</a></h4>
               </div>
         </div>
 
       </div>
-      <div class="deteils">
+      <style>
+        .deteils{
+        max-width: 90% ;
+        word-wrap:break-word;
+        }
+        .deteils h6{
+          max-width: 90% ;
+          word-wrap:break-word;
+          }
+      </style>
+      <div class="deteils" >
         <h4>  more details</h4>
         <h6><%= data.description %></h6>
       </div>
     </div>
  <!-- comment style  -->
- <style>body{font-family:"Playfair Display",serif;font-optical-sizing:auto;font-style:normal}.comments-container{max-width:600px;margin:0 auto;padding:20px;background-color:#f9f9f9;border-radius:10px;box-shadow:0 0 10px rgb(0 0 0 / .1)}.comment-section h2{font-size:24px;margin-bottom:20px}.comment-form{display:flex;flex-direction:column}.comment-form textarea{resize:none;padding:10px;border-radius:5px;border:1px solid #ccc;margin-bottom:10px}.comment-form button{align-self:flex-end;padding:10px 20px;border:none;border-radius:5px;background-color:#007bff;color:#fff;cursor:pointer}.comment-form button:hover{background-color:#0056b3}.comment{margin-bottom:20px}.comment p{margin:0;padding:10px;background-color:#fff;border-radius:5px;border:1px solid #ddd}.reply-form{margin-top:10px;display:flex;flex-direction:column}.reply-form textarea{resize:none;padding:10px;border-radius:5px;border:1px solid #ccc;margin-bottom:10px}.reply-form button{align-self:flex-end;padding:5px 10px;border:none;border-radius:5px;background-color:#6c757d;color:#fff;cursor:pointer}.reply-form button:hover{background-color:#5a6268}.reply{margin-top:10px;margin-left:20px}.reply p{margin:0;padding:10px;background-color:#f1f1f1;border-radius:5px;border:1px solid #ddd}.comment p{text-align:left}</style>
+ <style>body{font-family:"Playfair Display",serif;font-optical-sizing:auto;font-style:normal}.comments-container{max-width:600px;margin:0 auto;padding:20px;background-color:#f9f9f9;border-radius:10px;box-shadow:0 0 10px rgb(0 0 0 / .1)}.comment-section h2{font-size:24px;margin-bottom:20px}.comment-form{display:flex;flex-direction:column}.comment-form textarea{resize:none;padding:10px;border-radius:5px;border:1px solid #ccc;margin-bottom:10px}.comment-form button{align-self:flex-end;padding:10px 20px;border:none;border-radius:5px;background-color:#a2aa93;color:#fff;cursor:pointer}.comment-form button:hover{background-color:#a2aa93}.comment{margin-bottom:20px}.comment p{margin:0;padding:10px;background-color:#fff;border-radius:5px;border:1px solid #ddd}.reply-form{margin-top:10px;display:flex;flex-direction:column}.reply-form textarea{resize:none;padding:10px;border-radius:5px;border:1px solid #ccc;margin-bottom:10px}.reply-form button{align-self:flex-end;padding:5px 10px;border:none;border-radius:5px;background-color:#6c757d;color:#fff;cursor:pointer}.reply-form button:hover{background-color:#5a6268}.reply{margin-top:10px;margin-left:20px}.reply p{margin:0;padding:10px;background-color:#f1f1f1;border-radius:5px;border:1px solid #ddd}.comment p{text-align:left}</style>
     <div class="comments mt-5">
       <div class="comments-container">
         <div class="comment-section">

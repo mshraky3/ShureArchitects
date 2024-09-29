@@ -18,8 +18,8 @@
   </section>
   <hr class="hr">
   <section>
-    <style>.type-contaner{aspect-ratio:16/9}.btn-info{background-color:#b6bea5;border-color:#a2aa93;color:#fdfdfd}.btn-info:hover{background-color:#a2aa93;border-color:#0f0f0e;color:#fdfdfd}.card-body a{background-color:#b6bea5;border-color:#a2aa93;color:#0f0f0e}.card-body a:hover{background-color:#a2aa93;border-color:#a2aa93;color:#fdfdfd}</style>
-    
+
+    <style>.type-contaner{aspect-ratio:16/9}.btn-info{background-color:#b6bea5;border-color:#a2aa93;color:#fdfdfd}.btn-info:hover{background-color:#a2aa93;border-color:#0f0f0e;color:#fdfdfd}.card-title{color:#0f0f0e}.card-body a{background-color:#b6bea5;border-color:#a2aa93;color:#0f0f0e}.card-body a:hover{background-color:#a2aa93;border-color:#a2aa93;color:#fdfdfd}.card-text{color:#0f0f0e}</style>
     <div class="back" id="cards">
       <div class="container">
         <div class="row">
@@ -29,7 +29,6 @@
                 <div class="type-cards">
                   <div class="main-link"> <a href="/list/company">مكاتب هندسية</a></div>
                   <div class="arrow2"> <form action="/list/company" method="get"> <button class="btn btn-info more" name="upload_type" value="company">المزيد</button> </form> </div>
-
                   <div class="link"> <form action="/uploaded" method="post"> <style> </style> <button name="upload_type" value="company">المشاريع المعروضة</button> </form></div>
                   <div class="arrow"> <form action="/uploaded" method="post"> <button class="btn btn-info more" name="upload_type" value="company">المزيد</button> </form> </div>
                   <% if(locals.type ==='user'){ %>
@@ -97,6 +96,9 @@
   </section>
 
   <section class="some-posts">
+    <div class="contrast">
+
+    
     <div class="some-posts-contaner">
       <div class="some-posts-text">
         المشاريع المعروضة-مكاتب هندسية
@@ -115,7 +117,7 @@
                 <div class="img-control">
                 </div>
                 <img class="card-img-top" src="data:image/jpeg;base64,<%= company.images[0] %>" alt="<%= company.name %>" alt="Card image cap" width="250px" height="143px" overflow="hidden">
-                <div class="card-body">
+                <div class="card-body" >
                   <h5 class="card-title"><%=company.name %></h5>
                   <p class="card-text"><%=company.title %></p>
                   <a href="/post/company/<%=company.id%>" class="btn btn-primary">المزيد من التفاصيل</a>
@@ -158,7 +160,7 @@
             <div class="some-posts-posts">
               <div class="card" style="width: 16rem;">
                 <img class="card-img-top" src="data:image/jpeg;base64,<%= contractor.images[0] %>" alt="<%= contractor.name %>" alt="Card image cap" width="250px" height="143px" overflow="hidden">
-                <div class="card-body">
+                <div class="card-body" >
                   <h5 class="card-title"><%=contractor.name %></h5>
                   <p class="card-text"><%=contractor.title %></p>
                   <a href="/post/contractor/<%=contractor.id%>" class="btn btn-primary">المزيد من التفاصيل</a>
@@ -184,12 +186,12 @@
             <% } %>
       </div>      
     </div>
-
+  </div>
   </section>
 
 
   <section class="contact-section">
-  <div class="back_to_top"><a href="#"><i class="fa-solid fa-arrow-up-long fa-2xl" style="color: #fafafa;" id="arrow-up"></i></a></div>
+  <div class="back_to_top"><a href="#"><i class="fa-solid fa-arrow-up-long fa-2xl" style="color: #a2aa93;" id="arrow-up"></i></a></div>
   <div class="back_to_top"><a href="#" id="back" ><h3 > back to top </h3></a></div>
   <footer>
     <div class="footer">

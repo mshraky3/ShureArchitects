@@ -47,10 +47,10 @@
     <hr>
     <div class="content">
       <style>.div1{aspect-ratio: 16/9; }  </style>
-      <% if(!locals.companies.logo_image){ %>
+      <% if(locals.posts){ %>
       <% companies.forEach(company => { %>
         <div class="parent">
-          <img class="div1" src="data:image/jpeg;base64,<%= company.images[0] %>" alt="<%= company.name %> Logo" width="90%">
+          <img class="div1" src="data:image/jpeg;base64,<%=company.images[0]%>" alt="knndfs"  width="90%">
           <div class="div2">
             <div class="flex-start">
               <p>COMPANY NAME:<strong><%= company.name %></p></strong>
@@ -77,16 +77,14 @@
             </div>
           </div>
           <div class="div7">
-            <a href="/post/<%=type%>/<%=company.id%>" class="more-details">MORE DETAILS <i class="fa-sharp-duotone fa-solid fa-arrow-right-long fa-fade fa-2xl"></i></a>
+            <a href="/post/<%=type%>/<%=company.id%>" class="more-details">MORE DETAILS <i style="color: #a2aa93;" class="fa-sharp-duotone fa-solid fa-arrow-right-long fa-fade fa-2xl"></i></a>
           </div>
         </div>
       <% }) %>
-      <% } else { %>
-        <% Object.values(companies).forEach(company => { %>
+      <% }else {%>
+        <%companies.forEach(company => { %>
           <div class="parent">
-            <% if (locals.companies.logo_image) { %>
-              <img class="div1" src="data:image/jpeg;base64,<%= company.logo_image[0] %>" alt="<%= company.name %> Logo" width="60%" style="border-radius: 50% ; aspect-ratio: 1;; " >
-            <% } %>
+              <img class="div1" src="data:image/jpeg;base64,<%= company.logo_image[0] %>" alt="<%= company.name %> Logo" width="60%" style=" aspect-ratio: 16/9; width:100%; " >
             <div class="div2">
               <div class="flex-start">
                 <p>COMPANY NAME: <strong><%= company.name %></p></strong>
@@ -118,7 +116,7 @@
               </div>
             </div>
             <div class="div7">
-              <a href="/account/<%=type%>/<%=company.id%>" class="more-details">view account <i class="fa-sharp-duotone fa-solid fa-arrow-right-long fa-fade fa-2xl"></i></a>
+              <a href="/account/<%=type%>/<%=company.id%>" class="more-details">view account <i style="color: #a2aa93;" class="fa-sharp-duotone fa-solid fa-arrow-right-long fa-fade fa-2xl"></i></a>
             </div>
           </div>
         <% }) %>
