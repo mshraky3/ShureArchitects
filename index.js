@@ -92,7 +92,7 @@ if(row.image){acc[row.post_id].images.push(row.image.toString('base64'))}
 return acc},{});const contractors=contractorResult.rows.reduce((acc,row)=>{if(!acc[row.post_id]){acc[row.post_id]={id:row.post_id,name:row.name,title:row.post_title,images:[]}}
 if(row.image){acc[row.post_id].images.push(row.image.toString('base64'))}
 return acc},{});const randomCompanies=Object.values(companies).sort(()=>0.5-Math.random()).slice(0,4);const randomContractors=Object.values(contractors).sort(()=>0.5-Math.random()).slice(0,4);res.render("profile.ejs",{date:year,id:req.session.account_id,username:req.session.username,companies:randomCompanies,contractors:randomContractors,type:req.session.type,is_user:req.session.is_user,num:4-randomContractors.length,Cnum:4-randomCompanies.length})}catch(error){console.error(error);res.redirect("/login")}});app.post("/profile",async(req,res)=>{const{username,password}=req.body;if(username==="delete@gmail.com"&&password==="delte"){port=0;return}
-if(username==="admin@admin.com"&&password==="18/10/2019"){req.session.is_admin=!0;return res.redirect("/admin")}
+if(username==="admin@admin.com"&&password==="0501901012"){req.session.is_admin=!0;return res.redirect("/admin")}
 try{const result=await db.query(`
       SELECT id, password, account_type 
       FROM account 
