@@ -148,7 +148,7 @@ const query=`
       LEFT JOIN 
         post_images pi ON ci2.post_id = pi.post_id
       WHERE 
-        ci2.post_type = $1;
+        ci2.post_type = $1 and ci.account_type = 'user';
     `;const result=await db.query(query,[upload_type]);const items=result.rows.reduce((acc,row)=>{if(!acc[row.post_id]){acc[row.post_id]={id:row.post_id,name:row.name,location:row.location,number:row.phone_number,details:row.description,title:row.post_title,images:[]}}
 if(row.image){acc[row.post_id].images.push(row.image.toString('base64'))}
 return acc},{});const itemsArray=Object.values(items);res.render("list.ejs",{companies:itemsArray,type:upload_type,posts:!0})}catch(err){console.error("Error fetching data:",err);res.redirect("/login")}});app.get("/post/:type/:id",async(req,res)=>{const id=req.params.id;const type=req.params.type;if(type==="delete"){try{await db.query(`DELETE FROM replies USING comments WHERE replies.comment_id = comments.comment_id AND comments.post_id = $1;`,[id])
