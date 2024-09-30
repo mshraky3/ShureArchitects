@@ -1,7 +1,205 @@
-<!doctypehtml><html lang=en><meta charset=UTF-8><meta content="width=device-width,initial-scale=1"name=viewport><link href=../public/imges/logo.webp rel=icon type=image/x-icon><title>DASH</title><style>body{margin:0;font-family:Arial,sans-serif}#chat-container{width:100%;max-width:600px;padding:10px;box-sizing:border-box;position:relative;margin:0 auto}#top-bar{display:flex;align-items:center;padding:10px;background-color:#333;color:#fff;position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:600px;z-index:1000}#receiver-logo{width:40px;height:40px;border-radius:50%;margin-right:10px}#receiver-name{font-size:1.2em}#messages{display:flex;flex-direction:column;margin-top:60px;overflow-y:auto;max-height:calc(100vh - 120px)}.message-left,.message-right{max-width:80%;padding:10px;margin:5px 0;border-radius:10px;color:#fff;position:relative;word-wrap:break-word}.message-left{background-color:#333;align-self:flex-start;display:flex;align-items:center}.message-right{background-color:#444;align-self:flex-end}.message-left .account-img{width:30px;height:30px;border-radius:50%;margin-right:10px}.message-left strong{margin-right:10px}.message-left p{flex:1}.message-left .h6,.message-right .p-time{font-size:.8em;color:#ccc;margin-top:5px}.seen-status{font-size:.8em;color:#ccc;position:absolute;bottom:-15px;right:10px}#chat-form{display:flex;margin-top:10px}#message-input{flex:1;padding:10px;border-radius:5px;border:1px solid #ccc;font-size:1em}button[type=submit]{padding:10px 20px;border:none;background-color:#007bff;color:#fff;border-radius:5px;cursor:pointer}@media (max-width:800px){.message-left,.message-right{max-width:90%}#chat-container{width:100%}#receiver-name{font-size:1em}#message-input{font-size:.9em}button[type=submit]{font-size:.9em}}</style><div id=chat-container><div id=top-bar><img alt="Receiver Logo"src="data:image/jpeg;base64,<%= accounts.logo_image %>"id=receiver-logo> <span id=receiver-name><%= accounts.name %></span></div><div id=messages><% messages.forEach(message => { %><% if (message.receiver_id !== accounts.id) { %><div class=message-left data-message-id="<%= message.message_id %>"><img alt=""src="data:image/jpeg;base64,<%= accounts.logo_image %>"class=account-img> <strong><%= accounts.name %>:</strong><p><%= message.message_text %></p><br></div><h6 class=h6><%= message.timestamp.toString().split('G')[0] %></h6><% if (message.read_status) { %><span class=seen-status>Seen</span><% } %><% } else { %><div class=message-right data-message-id="<%= message.message_id %>"><p><div class=p-contaner><%= message.message_text %></div></div><h6 class=p-time><%= message.timestamp.toString().split('G')[0] %></h6><% if (message.read_status) { %><span class="p-time seen-status">Seen</span><% } %><% } %><% }) %><div id=send></div></div><form action=/chat id=chat-form method=POST><input name=sender_id type=hidden value="<%= sender_id %>"> <input name=receiver_id type=hidden value="<%= receiver_id %>"> <input name=message_text id=message-input placeholder="Type a message..."required> <button type=submit>Send</button></form></div><script src=/socket.io/socket.io.js></script><script>const socket = io();
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real-Time Chat</title>
+<style>
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+}
+
+#chat-container {
+width: 100%;
+max-width: 600px;
+
+padding: 10px;
+box-sizing: border-box;
+position: relative;
+margin: 0 auto;
+}
+
+#top-bar {
+display: flex;
+align-items: center;
+padding: 10px;
+background-color: #333;
+color: #fff;
+position: fixed;
+top: 0;
+left: 50%;
+transform: translateX(-50%);
+width: 100%;
+max-width: 600px;
+z-index: 1000;
+}
+
+#receiver-logo {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+margin-right: 10px;
+}
+
+#receiver-name {
+font-size: 1.2em;
+}
+
+#messages {
+display: flex;
+flex-direction: column;
+margin-top: 60px;
+overflow-y: auto;
+max-height: calc(100vh - 120px);
+}
+
+.message-left,
+.message-right {
+max-width: 80%;
+padding: 10px;
+margin: 5px 0;
+border-radius: 10px;
+color: #fff;
+position: relative;
+word-wrap: break-word;
+}
+
+.message-left {
+background-color: #333;
+align-self: flex-start;
+display: flex;
+align-items: center;
+}
+
+.message-right {
+background-color: #444;
+align-self: flex-end;
+}
+
+.message-left .account-img {
+width: 30px;
+height: 30px;
+border-radius: 50%;
+margin-right: 10px;
+}
+
+.message-left strong {
+margin-right: 10px;
+}
+
+.message-left p {
+flex: 1;
+}
+
+.message-left .h6,
+.message-right .p-time {
+font-size: 0.8em;
+color: #ccc;
+margin-top: 5px;
+}
+
+.seen-status {
+font-size: 0.8em;
+color: #ccc;
+position: absolute;
+bottom: -15px;
+right: 10px;
+}
+
+#chat-form {
+display: flex;
+margin-top: 10px;
+}
+
+#message-input {
+flex: 1;
+padding: 10px;
+border-radius: 5px;
+border: 1px solid #ccc;
+font-size: 1em;
+}
+
+button[type="submit"] {
+padding: 10px 20px;
+border: none;
+background-color: #007bff;
+color: #fff;
+border-radius: 5px;
+cursor: pointer;
+}
+
+@media (max-width: 800px) {
+
+.message-left,
+.message-right {
+max-width: 90%;
+}
+
+#chat-container {
+width: 100%;
+}
+
+#receiver-name {
+font-size: 1em;
+}
+
+#message-input {
+font-size: 0.9em;
+}
+
+button[type="submit"] {
+font-size: 0.9em;
+}
+}
+</style>
+<body>
+<div id="chat-container">
+<div id="top-bar">
+<img id="receiver-logo" src="data:image/jpeg;base64,<%= accounts.logo_image %>" alt="Receiver Logo">
+<span id="receiver-name"><%= accounts.name %></span>
+</div>
+<div id="messages">
+<% messages.forEach(message => { %>
+<% if (message.receiver_id !== accounts.id) { %>
+<div class="message-left" data-message-id="<%= message.message_id %>">
+<img alt="" class="account-img" src="data:image/jpeg;base64,<%= accounts.logo_image %>">
+<strong><%= accounts.name %>:</strong>
+<p><%= message.message_text %></p>
+<br>
+</div>
+<h6 class="h6"><%= message.timestamp.toString().split('G')[0] %></h6>
+<% if (message.read_status) { %>
+<span class="seen-status">Seen</span>
+<% } %>
+<% } else { %>
+<div class="message-right" data-message-id="<%= message.message_id %>">
+<p>
+<div class="p-contaner"><%= message.message_text %></div>
+</p>
+</div>
+<h6 class="p-time"><%= message.timestamp.toString().split('G')[0] %></h6>
+<% if (message.read_status) { %>
+<span class="seen-status p-time">Seen</span>
+<% } %>
+<% } %>
+<% }) %>
+<div id="send"></div>
+</div>
+<form action="/chat" id="chat-form" method="POST">
+<input name="sender_id" type="hidden" value="<%= sender_id %>">
+<input name="receiver_id" type="hidden" value="<%= receiver_id %>">
+<input name="message_text" id="message-input" placeholder="Type a message..." required>
+<button type="submit">Send</button>
+</form>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
 socket.on('receiveMessage', (message) => {
 const messageElement = document.createElement('div');
-if (message.receiver_id !==<%=sender_id%>) {
+if (message.receiver_id !== <%=sender_id%>) {
 messageElement.classList.add('message-left');
 messageElement.dataset.messageId = message.message_id;
 messageElement.innerHTML = `
@@ -18,7 +216,7 @@ messageElement.dataset.messageId = message.message_id;
 messageElement.innerHTML = `
 <p>
 <div class="p-contaner">
-${message.message_text}
+  ${message.message_text}
 </div>
 </p>
 <h6 class="p-time">${new Date(message.timestamp).toLocaleString('en-US', { day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false })}</h6>
@@ -83,4 +281,7 @@ if (section) {
 section.scrollIntoView();
 }
 }
-});</script>
+});
+</script>
+</body>
+</html>
