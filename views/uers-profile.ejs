@@ -101,6 +101,7 @@
         align-items: center;
         position: relative;
       }
+      
       .div1::before {
         content: "";
         display: block;
@@ -118,14 +119,12 @@
       
       .img {
         width: 80%;
-        padding-top: 80%; /* Aspect ratio 1:1 */
-        border-radius: 50%;
+        height: 80%; /* Ensure the aspect ratio is maintained */
+        clip-path: circle(50%);
         overflow: hidden !important;
-        border: 2px solid #050505;
+        border: 5px solid #050505;
         position: relative;
       }
-      
-
     .div2 {
       border-radius: 12px;
       border-radius: 12px;
