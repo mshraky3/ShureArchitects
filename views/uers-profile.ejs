@@ -95,34 +95,32 @@
     }
     .div1 {
         width: 320px;
-        height: 320px; /* Fallback for aspect-ratio */
+        height: 320px; 
         display: flex;
         justify-content: center;
         align-items: center;
         position: relative;
       }
-      
       .div1::before {
         content: "";
         display: block;
         padding-top: 100%; /* Aspect ratio 1:1 */
       }
-      
       .div1 img {
-        position: absolute;
+        display: flex;
+        justify-content: center;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: cover !important;
       }
-      
       .img {
-        width: 80%;
-        height: 80%; /* Ensure the aspect ratio is maintained */
-        clip-path: circle(50%);
+        width: 100%;
+        height: 100%; /* Ensure the aspect ratio is maintained */
+        clip-path: circle(45%);
         overflow: hidden !important;
-        border: 5px solid #050505;
+        background-color: #f8f8f7;
         position: relative;
       }
     .div2 {
@@ -131,17 +129,14 @@
       max-width: 100%;
       word-wrap: break-word
     }
-
     .div3 {
       border-radius: 12p
     }
-
     .div4 {
       max-width: 100%;
       word-wrap: break-word;
       border-radius: 12px
     }
-
     .div6 {
       border-radius: 12px;
       max-width: 100%;
@@ -308,20 +303,24 @@
       .div1 .img {
         width: 150px;
         height: 150px;
-        border: 1px solid #000000;
+
         
       } 
       .div2,
       .div3 {
         padding-top: 0%;
       }
+
+
       .div12 {
         grid-area: 9 / 1 / 10 / 3;
       }
+
       .flex-start {
         text-align: center;
         display: grid
       }
+
       .col {
         margin-left: 10%
       }
@@ -490,8 +489,8 @@
     <style>
       .card {
         width: 100%;
-        margin: 1%;
-        aspect-ratio: 16/9;
+        margin-bottom: 30%;
+        height: 51vh;
       }
 
       .card-text {
@@ -502,9 +501,11 @@
       <div class="row">
         <style>
           .card-img-top {
-            width: 100% !important;
-            overflow: hidden !important;
+            width: 100%;
+            height: 100%;
+            object-fit: contain !important; 
           }
+          
         </style><% if (posts.length > 0) { %><div class="col-12">
           <div id="postCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner"><% posts.forEach((post, index) => { %><div class="carousel-item <%= index === 0 ? 'active' : '' %>">

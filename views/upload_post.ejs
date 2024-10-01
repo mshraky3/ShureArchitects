@@ -11,7 +11,8 @@
 <% if(locals.account){ %>
 <form action="/upload_new_post" method="POST" enctype="multipart/form-data">
 <div class="content">
-<div class="parent">
+<div class="parent"> 
+<label for="" style="color: #a2aa93;">It is preferable that the image be in 16/9 dimensions to have the best appearance</label>
 <input type="file" name="image" multiple accept=".jpg, .jpeg, .png, .gif" />
 <div class="div2">
 <div class="flex-start">
@@ -43,7 +44,7 @@
 </div>
 </div>
 <input type="hidden" name="list_type" , value='<%=list_type%>'>
-<button type="submit">Upload</button>
+<button type="submit" style="background-color: #a2aa93;">Upload</button>
 </form>
 <% } %>
 </body>

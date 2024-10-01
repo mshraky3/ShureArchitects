@@ -33,7 +33,10 @@
   <div class="container">
     <h1 class="title"><%= type === 'company' ? 'Engineering Firms' : type === 'contractor' ? 'contractors' : 'freelancers' %></h1>
     <hr>
-    <div class="content"><% if(locals.posts){ %><% companies.forEach(company => { %><div class="parent"><img class="div1" src="data:image/jpeg;base64,<%=company.images[0]%>" alt="knndfs" width="90%">
+    <div class="content"><% if(locals.posts){ %><% companies.forEach(company => { %><div class="parent">
+        <div class="div1">
+            <img src="data:image/jpeg;base64,<%=company.images[0]%>" alt="knndfs" width="90%">
+        </div>
         <style>
         </style>
         <div class="div2">
