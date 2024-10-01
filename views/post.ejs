@@ -53,18 +53,18 @@ padding-right: 10%;
 <div class="content">
 <style> 
 
-  .carousel-item{ 
-    
-     object-fit:contain;
-      width: 100%;
-       height: 51vh;
-       ;} 
-       .d-block{
-        width: 100%;
-        height: 100%;
-        object-fit: contain !important; 
-       }
-      </style>
+.carousel-item{ 
+
+object-fit:contain;
+width: 100%;
+height: 51vh;
+;} 
+.d-block{
+width: 100%;
+height: 100%;
+object-fit: contain !important; 
+}
+</style>
 <div class="parent">
 <div class="div1">
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -173,7 +173,7 @@ word-wrap:break-word;
 <% if (comment.replies && comment.replies.length > 0) { %>
 <% comment.replies.forEach(reply => { %>
 <div class="reply">
-  <p><strong><%= reply.account_name %>:</strong> <%= reply.reply_text %></p>
+<p><strong><%= reply.account_name %>:</strong> <%= reply.reply_text %></p>
 </div>
 <% }) %>
 <% } else { %>
