@@ -4,14 +4,14 @@ import multer from 'multer';
 const app = express();app.use(fileUpload()); app.use(bodyParser.urlencoded({ extended: !0 })); app.use('/public', express.static('public')); app.use(session({ secret: "18/10/2019", resave: !1, saveUninitialized: !0, cookie: { maxAge: 1000 * 60 * 10 } }))
 const storage = multer.memoryStorage(); const upload = multer({ storage: storage }); const date = new Date()
 const year = date.getFullYear()
-// const db=new pg.Client({user:"users_x5qf_user",host:"dpg-crd1mqg8fa8c73bg324g-a",port:5432,password:"gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",database:"users_x5qf"})
-const db = new pg.Client({
-  password: "Ejc9c123",
-  host: "localhost",
-  database: "DASH",
-  user: "postgres",
-  port: 5432
-})
+const db=new pg.Client({user:"users_x5qf_user",host:"dpg-crd1mqg8fa8c73bg324g-a",port:5432,password:"gdFRLYxirPld1F0MrJ1rsK6LVlDDvFjj",database:"users_x5qf"})
+// const db = new pg.Client({
+//   password: "Ejc9c123",
+//   host: "localhost",
+//   database: "DASH",
+//   user: "postgres",
+//   port: 5432
+// })
 db.connect()
 async function get_users_data() { const result = await db.query("SELECT * FROM account"); return result }
 async function get_one_account(id) {
