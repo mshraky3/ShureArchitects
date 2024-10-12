@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Form</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
+    body {
+        font-family: "Playfair Display", serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+    }
 </style>
 <body>
     <div class="container mt-5">
-        <h2 class="mb-4">نموذج تسجيل دخول</h2>
+        <h2 class="mb-4">Account Form</h2>
         <h3 style="color: red;">
             <% if (locals.mseeg) { %>
                 <%= mseeg %>
@@ -21,57 +24,57 @@
         </h3>
         <form action="/register" method="POST" enctype="multipart/form-data" onsubmit="return validatePasswords()">
             <div class="form-group">
-                <label for="name">اسم الحساب</label>
-                <input type="text" class="form-control" name="name" placeholder="ادخل اسم الحساب">
+                <label for="name">Account Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter name">
             </div>
             <div class="form-group">
-                <label for="username">البريد الاكتروني</label>
-                <input type="text" class="form-control" name="username" placeholder="ادخل البريد الاكروني للحساب">
+                <label for="username">Email</label>
+                <input type="text" class="form-control" name="username" placeholder="Enter username">
             </div>
             <div class="form-group">
-                <label for="password">كلمة السر</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="ادخل كلمة السر">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
             </div>
             <div class="form-group">
-                <label for="confirm_password">تأكيد كلمة السر</label>
-                <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="ادخل تاكيد كلمة السر">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirm password">
             </div>
             <div class="form-group">
-                <label for="logo_image">شعار الحساب</label>
+                <label for="logo_image">Account Logo</label>
                 <input type="file" class="form-control-file" name="logo_image" accept=".jpg, .jpeg, .png, .gif">
             </div>
             <div class="form-group">
-                <label for="location">الموقع</label>
-                <input type="text" class="form-control" name="location" placeholder="ادخل الموقع">
+                <label for="location">Company Location</label>
+                <input type="text" class="form-control" name="location" placeholder="The company location">
             </div>
             <div class="form-group">
-                <label for="phone_number">رقم الهاتف</label>
-                <input type="text" class="form-control" name="phone_number" placeholder="ادخل رقم الهاتف">
+                <label for="phone_number">phone Number</label>
+                <input type="text" class="form-control" name="phone_number" placeholder="Enter phone number">
             </div>
             <div class="form-group">
-                <label for="email">البريد الاكتروني للتواصل مع العملاء</label>
-                <input type="email" class="form-control" name="email" placeholder="ادخل البريد الاكتروني">
+                <label for="email">Email to Communicate with Customers</label>
+                <input type="email" class="form-control" name="email" placeholder="Enter email">
             </div>
             <div class="form-group">
-                <label for="website_url">رابط الموقع الاكتروني</label>
-                <input type="url" class="form-control" name="website_url" placeholder="ادخل رابط الموقع الاكتروني">
+                <label for="website_url">Website URL</label>
+                <input type="url" class="form-control" name="website_url" placeholder="Enter website URL">
             </div>
             <div class="form-group">
             </div>
             <div class="form-group">
-                <label for="description">الوصف الخاص بك </label>
-                <textarea class="form-control" name="description" rows="3" placeholder="ادخل الوصف"></textarea>
+                <label for="description">Company / Account Description</label>
+                <textarea class="form-control" name="description" rows="3" placeholder="Enter description"></textarea>
             </div>
             <div class="form-group">
-                <label for="account_type">نوع الحساب</label>
+                <label for="account_type">Account Type</label>
                 <select class="form-control" name="account_type">
-                    <option value="company">مكتب هندسي</option>
-                    <option value="user">مستخدم</option>
-                    <option value="contractor">مقاول</option>
-                    <option value="freelancer">عمل حر</option>
+                    <option value="company">engineering</option>
+                    <option value="user">User</option>
+                    <option value="contractor">Contractor</option>
+                    <option value="freelancer">Freelancer</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">تسجيل حساب </button>
+            <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -47,7 +47,7 @@ padding-right: 10%;
 <center>
 <div class="">
 <h1 class="title text-center">
-<%= type === 'company' ? 'مكاتب هندسية' : type === 'contractor' ? 'مقاولات' : 'اعمال حرة' %>
+<%= type === 'company' ? 'Engineering Firms' : type === 'contractor' ? 'Contractors' : 'Freelancers' %>
 </h1>
 <hr>
 <div class="content">
@@ -92,24 +92,26 @@ object-fit: contain !important;
 </div>
 <div class="div2">
 <div class="d-flex">
-<p class="font-weight-bold mr-2">الاسم:</p>
+<p class="font-weight-bold mr-2">Name:</p>
 <p><%= data.post_title %></p>
 </div>
 </div>
 <div class="div3">
 <div class="d-flex">
-<p class="font-weight-bold mr-2">الموقع:</p>
+<p class="font-weight-bold mr-2">Location:</p>
 <p><%= data.location %></p>
 </div>
 </div>
 <div class="div4">
 <div class="d-flex">
-<p class="font-weight-bold mr-2">الحساب:</p>
+<p class="font-weight-bold mr-2">account:</p>
 <p><%= data.account_name %></p>
 </div>
 </div>
 <div class="div5">
 <div class="d-flex align-items-center" id="rating">
+<p class="font-weight-bold mr-2">Rating:</p>
+<p>under development</p>
 </div>
 </div>
 <div class="div6">
@@ -127,6 +129,7 @@ transform: scale(1.2);
 <h4 style="margin-bottom:10%; color:#a2aa93;"><a href="/account/account/<%=data.account_id%>"> view account</a></h4>
 </div>
 </div>
+
 </div>
 <style>
 .deteils{
@@ -139,21 +142,21 @@ word-wrap:break-word;
 }
 </style>
 <div class="deteils" >
-<h4>المزيد من التفاصيل</h4>
+<h4>  more details</h4>
 <h6><%= data.description %></h6>
 </div>
 </div>
 <!-- comment style  -->
-<style>body{font-optical-sizing:auto;font-style:normal}.comments-container{max-width:600px;margin:0 auto;padding:20px;background-color:#f9f9f9;border-radius:10px;box-shadow:0 0 10px rgb(0 0 0 / .1)}.comment-section h2{font-size:24px;margin-bottom:20px}.comment-form{display:flex;flex-direction:column}.comment-form textarea{resize:none;padding:10px;border-radius:5px;border:1px solid #ccc;margin-bottom:10px}.comment-form button{align-self:flex-end;padding:10px 20px;border:none;border-radius:5px;background-color:#a2aa93;color:#fff;cursor:pointer}.comment-form button:hover{background-color:#a2aa93}.comment{margin-bottom:20px}.comment p{margin:0;padding:10px;background-color:#fff;border-radius:5px;border:1px solid #ddd}.reply-form{margin-top:10px;display:flex;flex-direction:column}.reply-form textarea{resize:none;padding:10px;border-radius:5px;border:1px solid #ccc;margin-bottom:10px}.reply-form button{align-self:flex-end;padding:5px 10px;border:none;border-radius:5px;background-color:#6c757d;color:#fff;cursor:pointer}.reply-form button:hover{background-color:#5a6268}.reply{margin-top:10px;margin-left:20px}.reply p{margin:0;padding:10px;background-color:#f1f1f1;border-radius:5px;border:1px solid #ddd}.comment p{text-align:left}</style>
+<style>body{font-family:"Playfair Display",serif;font-optical-sizing:auto;font-style:normal}.comments-container{max-width:600px;margin:0 auto;padding:20px;background-color:#f9f9f9;border-radius:10px;box-shadow:0 0 10px rgb(0 0 0 / .1)}.comment-section h2{font-size:24px;margin-bottom:20px}.comment-form{display:flex;flex-direction:column}.comment-form textarea{resize:none;padding:10px;border-radius:5px;border:1px solid #ccc;margin-bottom:10px}.comment-form button{align-self:flex-end;padding:10px 20px;border:none;border-radius:5px;background-color:#a2aa93;color:#fff;cursor:pointer}.comment-form button:hover{background-color:#a2aa93}.comment{margin-bottom:20px}.comment p{margin:0;padding:10px;background-color:#fff;border-radius:5px;border:1px solid #ddd}.reply-form{margin-top:10px;display:flex;flex-direction:column}.reply-form textarea{resize:none;padding:10px;border-radius:5px;border:1px solid #ccc;margin-bottom:10px}.reply-form button{align-self:flex-end;padding:5px 10px;border:none;border-radius:5px;background-color:#6c757d;color:#fff;cursor:pointer}.reply-form button:hover{background-color:#5a6268}.reply{margin-top:10px;margin-left:20px}.reply p{margin:0;padding:10px;background-color:#f1f1f1;border-radius:5px;border:1px solid #ddd}.comment p{text-align:left}</style>
 <div class="comments mt-5">
 <div class="comments-container">
 <div class="comment-section">
-<h2>التعليقات</h2>
+<h2>Comments</h2>
 <form class="comment-form" name="comment" action="/comment" method="POST">
-<textarea class="form-control mb-3" name="comment_text" placeholder="اكتب تعليق"></textarea>
+<textarea class="form-control mb-3" name="comment_text" placeholder="Write a comment..."></textarea>
 <input type="hidden" name="post_id" value="<%= data.post_id %>">
 <input type="hidden" name="account_id" value="<%= account_id %>">
-<button type="submit" class="btn btn-primary">انشر تعليقك</button>
+<button type="submit" class="btn btn-primary">Post Comment</button>
 </form>
 <div class="comments">
 <% if (comments && comments.length > 0) { %>
@@ -161,10 +164,10 @@ word-wrap:break-word;
 <div class="comment">
 <p><strong><%= comment.account_name %>:</strong> <%= comment.comment_text %></p>
 <form class="reply-form" name="reply" action="/reply" method="POST">
-<textarea class="form-control mb-3" name="reply_text" placeholder="اكتب رد"></textarea>
+<textarea class="form-control mb-3" name="reply_text" placeholder="Write a reply..."></textarea>
 <input type="hidden" name="comment_id" value="<%= comment.comment_id %>">
 <input type="hidden" name="account_id" value="<%= account_id %>">
-<button type="submit" class="btn btn-secondary">رد على التعليق</button>
+<button type="submit" class="btn btn-secondary">Reply to comment</button>
 </form>
 <div class="replies">
 <% if (comment.replies && comment.replies.length > 0) { %>
@@ -174,13 +177,13 @@ word-wrap:break-word;
 </div>
 <% }) %>
 <% } else { %>
-<p>لا يوجد ردود</p>
+<p>No replies yet.</p>
 <% } %>
 </div>
 </div>
 <% }) %>
 <% } else { %>
-<p>لا يوجد تعليقات</p>
+<p>No comments yet.</p>
 <% } %>
 </div>
 </div>

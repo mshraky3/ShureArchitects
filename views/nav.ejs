@@ -74,15 +74,15 @@ color: #fff
       </form>
   </div>
   <form action="/login" method="get">
-      <button type="submit" class="butn btn btn-secondary" onclick="collapseNavbar()">تسجيل دخول</button>
+      <button type="submit" class="butn btn btn-secondary" onclick="collapseNavbar()">login</button>
   </form>
   <% if(!locals.is_user){ %>
   <form action="/register" method="get">
-      <button type="submit" class="butn btn btn-secondary" onclick="collapseNavbar()">أنشاء حساب جديد</button>
+      <button type="submit" class="butn btn btn-secondary" onclick="collapseNavbar()">sign up</button>
   </form>
   <% } else { %>
   <form action="/account/type/<%=id%>" method="get">
-      <button type="submit" class="butn btn btn-secondary" onclick="collapseNavbar()">الصفحة الشخصية</button>
+      <button type="submit" class="butn btn btn-secondary" onclick="collapseNavbar()">profile</button>
   </form>
   <% } %>
 </div>

@@ -1,5 +1,7 @@
 body {
-
+font-family: "Playfair Display", serif;
+font-optical-sizing: auto;
+font-style: normal;
 background-color: #f0f2f5;
 margin: 0;
 padding-top: 60px
